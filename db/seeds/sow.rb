@@ -1,7 +1,9 @@
 require_relative("./tier1/trip_seeds.rb")
 require_relative("./tier1/tag_seeds.rb")
 require_relative("./tier1/person_seeds.rb")
+
 require_relative("./tier2/transaction_seeds.rb")
+
 require_relative("./tier3/item_seeds.rb")
 require_relative("./tier3/person_trans_seeds.rb")
 require_relative("./tier3/trans_tag_seeds.rb")
@@ -53,5 +55,5 @@ trans_tags = TransTagSeeds.plant(transactions, tags)
 # binding.pry
 # nil
 
-binding.pry
-nil
+# binding.pry
+# nil
