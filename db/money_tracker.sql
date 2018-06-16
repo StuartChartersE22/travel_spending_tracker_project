@@ -11,6 +11,7 @@ CREATE TABLE trips(
   name VARCHAR(255),
   budget INT,
   current BOOLEAN UNIQUE,
+  business BOOLEAN,
   timelog TIMESTAMP
 );
 

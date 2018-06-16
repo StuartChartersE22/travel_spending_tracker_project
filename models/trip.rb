@@ -4,14 +4,14 @@ require("pry")
 
 class Trip
 
-  attr_reader(:id, :budget)
-  attr_accessor(:name, :current, :timelog)
+  attr_reader(:id, :budget, :current)
+  attr_accessor(:name, :timelog)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
-    @current = make_current() if details["current"]
+    @current = details["current"].downcase == "true" || details["current"] == "t" if details["current"]
     @business = details["business"].downcase == "true" || details["business"] == "t"
     @timelog = details["timelog"]
   end
@@ -25,12 +25,12 @@ class Trip
     @budget = Money.convert_to_integer(decimal_string)
   end
 
-  def toggle_current()
-    if @current
-      @current = nil
-    else
-      @current = true
-    end
+  def make_current()
+    @current = true
+  end
+
+  def make_not_current()
+    @current = nil
   end
 
 #Pure Ruby class methods
@@ -39,7 +39,18 @@ class Trip
   end
 
 #SQL instance methods
+  def save_initial()
+    sql = "INSERT INTO trips
+    (name, budget, current, business, timelog)
+    VALUES
+    ($1, $2, $3, $4, $5)
+    RETURNING id"
+    values = [@name, @budget, @current, @business, @timelog]
+    @id = SqlRunner.run(sql, values)[0]["id"].to_i()
+  end
+
   def save()
+    unique_current if @current
     sql = "INSERT INTO trips
     (name, budget, current, business, timelog)
     VALUES
@@ -57,6 +68,7 @@ class Trip
   end
 
   def update()
+    unique_current if @current
     sql = "UPDATE trips
     SET (name, budget, current, business, timelog) = ($1, $2, $3, $4, $5)
     WHERE id = $6"
@@ -77,15 +89,12 @@ class Trip
     return Money.convert_to_decimal_string(amount_left)
   end
 
-  def make_current()
-    if current = Trip.find_current()
-      current.toggle_current()
-      current.update()
-      toggle_current()
-    else
-      toggle_current()
+  def unique_current()
+    if Trip.find_current()
+      old_current = Trip.find_current()
+      old_current.make_not_current()
+      old_current.update
     end
-    update()
   end
 
 #SQL class methods
