@@ -11,7 +11,8 @@ class Trip
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
-    @current = true if details["current"]
+    @current = make_current() if details["current"]
+    @business = details["business"].downcase == "true" || details["business"] == "t"
     @timelog = details["timelog"]
   end
 
@@ -32,17 +33,6 @@ class Trip
     end
   end
 
-  def make_current()
-    if current = Trip.find_current()
-      current.toggle_current()
-      current.update()
-      toggle_current()
-    else
-      toggle_current()
-    end
-    update()
-  end
-
 #Pure Ruby class methods
   def self.map_trips(array_of_details)
     return array_of_details.map {|dets| self.new(dets)}
@@ -51,11 +41,11 @@ class Trip
 #SQL instance methods
   def save()
     sql = "INSERT INTO trips
-    (name, budget, current, timelog)
+    (name, budget, current, business, timelog)
     VALUES
-    ($1, $2, $3, $4)
+    ($1, $2, $3, $4, $5)
     RETURNING id"
-    values = [@name, @budget, @current, @timelog]
+    values = [@name, @budget, @current, @business, @timelog]
     @id = SqlRunner.run(sql, values)[0]["id"].to_i()
   end
 
@@ -68,9 +58,9 @@ class Trip
 
   def update()
     sql = "UPDATE trips
-    SET (name, budget, current, timelog) = ($1, $2, $3, $4)
-    WHERE id = $5"
-    values = [@name, @budget, @current, @timelog, @id]
+    SET (name, budget, current, business, timelog) = ($1, $2, $3, $4, $5)
+    WHERE id = $6"
+    values = [@name, @budget, @current, @business, @timelog, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -85,6 +75,17 @@ class Trip
   def remaining_budget()
     amount_left = @budget - expenditure_total
     return Money.convert_to_decimal_string(amount_left)
+  end
+
+  def make_current()
+    if current = Trip.find_current()
+      current.toggle_current()
+      current.update()
+      toggle_current()
+    else
+      toggle_current()
+    end
+    update()
   end
 
 #SQL class methods
