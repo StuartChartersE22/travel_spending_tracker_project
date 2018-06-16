@@ -14,7 +14,7 @@ class TripTest < MiniTest::Test
     @trip2 = Trip.new({
       "name" => "Family holiday",
       "budget" => "50000",
-      "current" => "true",
+      "current" => "false",
       "timelog" => "2018-10-13"
       })
   end
