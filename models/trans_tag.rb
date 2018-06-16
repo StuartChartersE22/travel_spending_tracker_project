@@ -11,4 +11,30 @@ class TransTag
     @tag_id = details["tag_id"].to_i()
   end
 
+  #Pure Ruby class methods
+    def self.map_relationships(array_of_details)
+      return array_of_details.map {|dets| self.new(dets)}
+    end
+
+  #SQL instance methods
+    def save()
+      sql = "INSERT INTO trans_tags
+      (transaction_id, tag_id) VALUES ($1, $2)
+      RETURNING id"
+      values = [@transaction_id, @tag_id]
+      @id = SqlRunner.run(sql, values)[0]["id"].to_i()
+    end
+
+  #SQL class methods
+    def self.delete_all()
+      sql = "DELETE FROM trans_tags"
+      return SqlRunner.run(sql)
+    end
+
+    def self.all()
+      sql = "SELECT * FROM trans_tags"
+      array_of_details = SqlRunner.run(sql)
+      return self.map_relationships(array_of_details)
+    end
+
 end

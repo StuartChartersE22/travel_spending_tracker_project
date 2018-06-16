@@ -4,10 +4,12 @@ require_relative("./tier1/person_seeds.rb")
 require_relative("./tier2/transaction_seeds.rb")
 require_relative("./tier3/item_seeds.rb")
 require_relative("./tier3/person_trans_seeds.rb")
+require_relative("./tier3/trans_tag_seeds.rb")
 
 #Tier 3
 Item.delete_all()
 PersonTrans.delete_all()
+TransTag.delete_all()
 
 #Tier 2
 Transaction.delete_all()
@@ -43,7 +45,11 @@ items = ItemSeeds.plant(transactions)
 # binding.pry
 # nil
 
-person_trans = PersonTransSeeds.plant(people, transactions)
+people_trans = PersonTransSeeds.plant(people, transactions)
+# binding.pry
+# nil
+
+trans_tags = TransTagSeeds.plant(transactions, tags)
 # binding.pry
 # nil
 
