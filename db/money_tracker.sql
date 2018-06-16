@@ -45,7 +45,8 @@ CREATE TABLE people_trans(
   id SERIAL4 PRIMARY KEY,
   transaction_id INT4 REFERENCES transactions(id),
   person_id INT4 REFERENCES people(id),
-  owe INT
+  owe INT,
+  timelog TIMESTAMP
 );
 
 CREATE TABLE trans_tags(
