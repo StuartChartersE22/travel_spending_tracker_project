@@ -8,7 +8,7 @@ class Tag
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
-    @name = details["name"]
+    @name = details["name"].downcase()
   end
 
 end
