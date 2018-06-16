@@ -1,7 +1,7 @@
 require("../db/sql_runner_money_tracker.rb")
 require("pry")
 
-class Trip
+class Person
 
   attr_reader(:id)
   attr_accessor(:name)
