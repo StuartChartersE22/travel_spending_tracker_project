@@ -24,6 +24,25 @@ class Trip
     @budget = Money.convert_to_integer(decimal_string)
   end
 
+  def toggle_current()
+    if @current
+      @current = nil
+    else
+      @current = true
+    end
+  end
+
+  def make_current()
+    if current = Trip.find_current()
+      current.toggle_current()
+      current.update()
+      toggle_current()
+    else
+      toggle_current()
+    end
+    update()
+  end
+
 #Pure Ruby class methods
   def self.map_trips(array_of_details)
     return array_of_details.map {|dets| self.new(dets)}
@@ -66,14 +85,6 @@ class Trip
   def remaining_budget()
     amount_left = @budget - expenditure_total
     return Money.convert_to_decimal_string(amount_left)
-  end
-
-  def toggle_current()
-    if @current
-      @current = nil
-    else
-      @current = true
-    end
   end
 
 #SQL class methods
