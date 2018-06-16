@@ -36,7 +36,7 @@ class Item
     def self.all()
       sql = "SELECT * FROM items"
       array_of_details = SqlRunner.run(sql)
-      return self.map_people(array_of_details)
+      return self.map_items(array_of_details)
     end
 
 end
