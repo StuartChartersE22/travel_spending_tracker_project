@@ -11,4 +11,30 @@ class Tag
     @name = details["name"].downcase()
   end
 
+  #Pure Ruby class methods
+    def self.map_tags(array_of_details)
+      return array_of_details.map {|dets| Tag.new(dets)}
+    end
+
+  #SQL instance methods
+    def save()
+      sql = "INSERT INTO tags
+      (name) VALUES ($1)
+      RETURNING id"
+      values = [@name]
+      @id = SqlRunner.run(sql, values)[0]["id"].to_i()
+    end
+
+  #SQL class methods
+    def self.delete_all()
+      sql = "DELETE FROM tags"
+      return SqlRunner.run(sql)
+    end
+
+    def self.all()
+      sql = "SELECT * FROM tags"
+      array_of_details = SqlRunner.run(sql)
+      return self.map_tags(array_of_details)
+    end
+
 end
