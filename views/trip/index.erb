@@ -1,0 +1,10 @@
+<h1>Trips</h1>
+
+<dl class="trip-list" id="trip-list-current" <%= "hidden" unless Trip.find_current() %>>
+  <dt><%= Trip.find_current().name() %></dt>
+</ul>
+
+<% Trip.all_but_current().each do %>
+<dl class="trip-list">
+
+</dl>

@@ -5,6 +5,9 @@ also_reload("../controllers/*")
 require_relative("../models/trip.rb")
 
 #INDEX
+get "/trips" do
+  erb(:"/trip/index")
+end
 
 #CREATE
 

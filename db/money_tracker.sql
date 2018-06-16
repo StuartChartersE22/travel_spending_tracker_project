@@ -10,7 +10,7 @@ CREATE TABLE trips(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
   budget INT,
-  current BOOLEAN,
+  current BOOLEAN UNIQUE,
   timelog TIMESTAMP
 );
 

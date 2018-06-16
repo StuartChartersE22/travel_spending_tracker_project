@@ -11,7 +11,7 @@ class Trip
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @budget = Money.convert_to_integer(details["budget"])
-    @current = details["current"].downcase() == "t" || details["current"].downcase() == "true"
+    @current = true if details["current"]
     @timelog = details["timelog"]
   end
 
@@ -72,6 +72,18 @@ class Trip
     values = [id]
     details = SqlRunner.run(sql, values)[0]
     return self.new(details)
+  end
+
+  def self.find_current()
+    sql = "SELECT * FROM trips WHERE current = true"
+    details = SqlRunner.run(sql)
+    return self.new(details[0]) if details[0]
+  end
+
+  def self.all_but_current()
+    sql = "SELECT * FROM trips EXCEPT (SELECT * FROM trips WHERE current = true)  "
+    array_of_details = SqlRunner.run(sql)
+    return self.map_trips(array_of_details)
   end
 
 end

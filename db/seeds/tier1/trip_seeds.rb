@@ -16,7 +16,6 @@ class TripSeeds
     trip2 = Trip.new({
       "name" => "Business trip",
       "budget" => "200.00",
-      "current" => "false",
       "timelog" => "2018-05-06"
     })
 
