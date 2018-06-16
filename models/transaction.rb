@@ -4,8 +4,8 @@ require("pry")
 
 class Transaction
 
-  attr_reader(:id, :trip_id)
-  attr_accessor(:name, :amount, :timelog, :business, :company)
+  attr_reader(:id, :trip_id, :amount)
+  attr_accessor(:name, :timelog, :business, :company)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
@@ -20,6 +20,10 @@ class Transaction
   #Pure Ruby instance methods
     def show_decimal_amount()
       return Money.convert_to_decimal_string(@amount)
+    end
+
+    def change_amount(decimal_string)
+      @amount = Money.convert_to_integer(decimal_string)
     end
 
   #Pure Ruby class methods
@@ -42,6 +46,14 @@ class Transaction
       sql = "DELETE FROM transactions
       WHERE id = $1"
       values = [@id]
+      SqlRunner.run(sql, values)
+    end
+
+    def update()
+      sql = "UPDATE transactions
+      SET (name, trip_id, amount, timelog, business, company) = ($1, $2, $3, $4, $5, $6)
+      WHERE id = $7"
+      values = [@name, @trip_id, @amount, @timelog, @business, @company, @id]
       SqlRunner.run(sql, values)
     end
 

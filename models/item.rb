@@ -3,7 +3,7 @@ require("pry")
 
 class Item
 
-  attr_reader(:id, :transaction_id)
+  attr_reader(:id, :transaction_id, :amount)
   attr_accessor(:name)
 
   def initialize(details)
@@ -13,10 +13,21 @@ class Item
     @transaction_id = details["transaction_id"].to_i()
   end
 
+  #Pure Ruby instance methods
+  def show_decimal_amount()
+    return Money.convert_to_decimal_string(@amount)
+  end
+
+  def change_amount(decimal_string)
+    @amount = Money.convert_to_integer(decimal_string)
+  end
+
   #Pure Ruby class methods
     def self.map_items(array_of_details)
       return array_of_details.map {|dets| self.new(dets)}
     end
+
+
 
   #SQL instance methods
     def save()
@@ -31,6 +42,14 @@ class Item
       sql = "DELETE FROM items
       WHERE id = $1"
       values = [@id]
+      SqlRunner.run(sql, values)
+    end
+
+    def update()
+      sql = "UPDATE transactions
+      SET (name, amount, transaction_id) = ($1, $2, $3)
+      WHERE id = $4"
+      values = [@name, @amount, @transaction_id, @id]
       SqlRunner.run(sql, values)
     end
 

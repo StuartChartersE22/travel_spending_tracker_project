@@ -32,6 +32,14 @@ class Person
       SqlRunner.run(sql, values)
     end
 
+    def update()
+      sql = "UPDATE people
+      SET (name) = ($1)
+      WHERE id = $2"
+      values = [@name, @id]
+      SqlRunner.run(sql, values)
+    end
+
   #SQL class methods
     def self.delete_all()
       sql = "DELETE FROM people"

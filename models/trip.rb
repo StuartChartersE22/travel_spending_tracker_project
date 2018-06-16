@@ -20,6 +20,10 @@ class Trip
     return Money.convert_to_decimal_string(@budget)
   end
 
+  def change_budget(decimal_string)
+    @budget = Money.convert_to_integer(decimal_string)
+  end
+
 #Pure Ruby class methods
   def self.map_trips(array_of_details)
     return array_of_details.map {|dets| self.new(dets)}
@@ -40,6 +44,14 @@ class Trip
     sql = "DELETE FROM trips
     WHERE id = $1"
     values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def update()
+    sql = "UPDATE trips
+    SET (name, budget, current, timelog) = ($1, $2, $3, $4)
+    WHERE id = $5"
+    values = [@name, @budget, @current, @timelog, @id]
     SqlRunner.run(sql, values)
   end
 
