@@ -16,4 +16,8 @@ class TripTest < MiniTest::Test
     assert_equal("Family holiday", @trip1.name())
   end
 
+  def test_has_budget_in_pence
+    assert_equal(50_000, @trip1.budget())
+  end
+
 end
