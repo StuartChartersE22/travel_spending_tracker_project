@@ -1,6 +1,6 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
-also_reload("../models/*")
+also_reload("../models/*.rb")
 require_relative("../models/trip.rb")
 
 #INDEX

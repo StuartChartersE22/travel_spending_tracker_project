@@ -90,7 +90,7 @@ class Trip
   def self.find_current()
     sql = "SELECT * FROM trips WHERE current = true"
     details = SqlRunner.run(sql)
-    if details[0]
+    if details.values().length() != 0
       return self.new(details[0])
     else
       return false
