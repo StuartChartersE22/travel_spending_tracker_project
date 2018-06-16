@@ -1,10 +1,45 @@
 <h1>Trips</h1>
 
-<dl class="trip-list" id="trip-list-current" <%= "hidden" unless Trip.find_current() %>>
-  <dt><%= Trip.find_current().name() %></dt>
+<% if Trip.find_current() %>
+<% current = Trip.find_current() %>
+<ul class="trip-list" id="trip-list-current">
+  <li><table>
+    <thead>
+      <h3><%= current.name() %></h3>
+    </thead>
+    <tr>
+      <th>Spending money:</th>
+      <td class="remaining-budget"><%= current.remaining_budget %></td>
+    </tr>
+    <tfoot>
+      <a href="/<%= current.id() %>/new">New transaction</a>
+      <a href="/<%= current.id()%>">See transactions</a>
+      <form class="delete" action="/<%= current.id() %>/delete" method="post">
+        <input type="submit" value="Delete Trip" class="button">
+      </form>
+    </tfoot>
+  </table> </li>
 </ul>
+<% end %>
 
-<% Trip.all_but_current().each do %>
-<dl class="trip-list">
 
-</dl>
+<ul class="trip-list">
+  <% for trip in Trip.all_but_current() %>
+  <li><table>
+    <thead>
+      <h3><%= trip.name() %></h3>
+    </thead>
+    <tr>
+      <th>Spending money:</th>
+      <td class="remaining-budget"><%= trip.remaining_budget %></td>
+    </tr>
+    <tfoot>
+      <a href="/<%= trip.id()%>/new">New transaction</a>
+      <a href="/<%= trip.id()%>">See transactions</a>
+      <form class="delete" action="/<%= trip.id() %>/delete" method="post">
+        <input type="submit" value="Delete Trip" class="button">
+      </form>
+    </tfoot>
+  </table> </li>
+<% end %>
+</ul>

@@ -55,6 +55,19 @@ class Trip
     SqlRunner.run(sql, values)
   end
 
+  def expenditure_total()
+    sql = "SELECT SUM(transactions.amount) FROM trips
+    INNER JOIN transactions ON trips.id = transactions.trip_id
+    WHERE trips.id = $1"
+    values = [@id]
+    return SqlRunner.run(sql, values).values()[0][0].to_i()
+  end
+
+  def remaining_budget()
+    amount_left = @budget - expenditure_total
+    return Money.convert_to_decimal_string(amount_left)
+  end
+
 #SQL class methods
   def self.delete_all()
     sql = "DELETE FROM trips"
@@ -77,7 +90,11 @@ class Trip
   def self.find_current()
     sql = "SELECT * FROM trips WHERE current = true"
     details = SqlRunner.run(sql)
-    return self.new(details[0]) if details[0]
+    if details[0]
+      return self.new(details[0])
+    else
+      return false
+    end
   end
 
   def self.all_but_current()

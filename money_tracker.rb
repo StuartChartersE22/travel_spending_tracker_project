@@ -1,3 +1,5 @@
+require( 'sinatra' )
+require( 'sinatra/contrib/all' )
 require_relative('controllers/item_controller')
 require_relative('controllers/person_controller')
 require_relative('controllers/person_trans_controller')
