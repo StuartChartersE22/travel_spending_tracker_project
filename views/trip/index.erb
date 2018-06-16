@@ -10,8 +10,13 @@
       <h3><%= current.name() %></h3>
     </thead>
     <tr>
+    <% if current.budget() %>
       <th>Spending money left:</th>
-      <td class="remaining-budget"><%= current.remaining_budget %></td>
+      <td class="amount"><%= current.remaining_budget() %></td>
+    <% else %>
+      <th>Amount spent:</th>
+      <td class="amount"><%= current.expenditure_total() %></td>
+    <% end %>
     </tr>
     </table>
 
@@ -34,11 +39,10 @@
     </thead>
     <tr>
       <th>Amount spent:</th>
-      <td class="remaining-budget"><%= trip.expenditure_total() %></td>
+      <td class="amount"><%= trip.expenditure_total() %></td>
     </tr>
     </table>
 
-    <a href="/<%= trip.id()%>/new">New transaction</a>
     <a href="/<%= trip.id()%>">See transactions</a>
     <form class="delete" action="/<%= trip.id() %>/delete" method="post">
       <input type="submit" value="Delete Trip" class="button">

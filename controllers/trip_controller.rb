@@ -8,9 +8,15 @@ get "/trips" do
   erb(:"/trip/index")
 end
 
-#CREATE
-
 #NEW
+get "/trips/new" do
+  erb(:"/trip/new")
+end
+
+#CREATE
+# post "/trips" do
+#
+# end
 
 #SHOW
 

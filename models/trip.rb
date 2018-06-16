@@ -10,7 +10,7 @@ class Trip
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
-    @budget = Money.convert_to_integer(details["budget"])
+    @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
     @current = true if details["current"]
     @timelog = details["timelog"]
   end
@@ -68,6 +68,14 @@ class Trip
     return Money.convert_to_decimal_string(amount_left)
   end
 
+  def toggle_current()
+    if @current
+      @current = nil
+    else
+      @current = true
+    end
+  end
+
 #SQL class methods
   def self.delete_all()
     sql = "DELETE FROM trips"
@@ -98,7 +106,7 @@ class Trip
   end
 
   def self.all_but_current()
-    sql = "SELECT * FROM trips EXCEPT (SELECT * FROM trips WHERE current = true)  "
+    sql = "SELECT * FROM trips EXCEPT (SELECT * FROM trips WHERE current = true)"
     array_of_details = SqlRunner.run(sql)
     return self.map_trips(array_of_details)
   end
