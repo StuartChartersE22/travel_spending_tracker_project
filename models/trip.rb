@@ -22,7 +22,7 @@ class Trip
 
 #Pure Ruby class methods
   def self.map_trips(array_of_details)
-    return array_of_details.map {|dets| Trip.new(dets)}
+    return array_of_details.map {|dets| self.new(dets)}
   end
 
 #SQL instance methods

@@ -1,24 +1,28 @@
 require_relative("../../../models/trip.rb")
 require("pry")
 
-Trip.delete_all()
+# Trip.delete_all()
+class TripSeeds
 
-trip1 = Trip.new({
-  "name" => "Family holiday",
-  "budget" => "500.00",
-  "current" => "true",
-  "timelog" => "2018-10-13"
-  })
+  def self.plant()
 
-trip2 = Trip.new({
-  "name" => "Business trip",
-  "budget" => "200.00",
-  "current" => "false",
-  "timelog" => "2018-05-06"
-  })
+    trip1 = Trip.new({
+      "name" => "Family holiday",
+      "budget" => "500.00",
+      "current" => "true",
+      "timelog" => "2018-10-13"
+    })
 
-  trip1.save()
-  trip2.save()
+    trip2 = Trip.new({
+      "name" => "Business trip",
+      "budget" => "200.00",
+      "current" => "false",
+      "timelog" => "2018-05-06"
+    })
 
-  binding.pry
-  nil
+    trip1.save()
+    trip2.save()
+    return [trip1, trip2]
+  end
+
+end

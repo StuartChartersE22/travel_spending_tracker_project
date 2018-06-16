@@ -1,13 +1,15 @@
 require_relative("../../../models/tag.rb")
 require("pry")
 
-Tag.delete_all()
+class TagSeeds
 
-tag1 = Tag.new({
-  "name" => "Lunch"
-  })
+  def self.plant()
+    tag1 = Tag.new({
+      "name" => "Lunch"
+    })
 
-  tag1.save()
+    tag1.save()
+    return [tag1]
+  end
 
-  binding.pry
-  nil
+end

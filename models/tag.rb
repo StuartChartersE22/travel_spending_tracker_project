@@ -13,7 +13,7 @@ class Tag
 
   #Pure Ruby class methods
     def self.map_tags(array_of_details)
-      return array_of_details.map {|dets| Tag.new(dets)}
+      return array_of_details.map {|dets| self.new(dets)}
     end
 
   #SQL instance methods

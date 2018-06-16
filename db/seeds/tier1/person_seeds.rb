@@ -1,13 +1,15 @@
 require_relative("../../../models/person.rb")
 require("pry")
 
-Person.delete_all()
+class PersonSeeds
 
-person1 = Person.new({
-  "name" => "Jane"
-  })
+  def self.plant()
+    person1 = Person.new({
+      "name" => "Jane"
+    })
 
-  person1.save()
+    person1.save()
+    return [person1]
+  end
 
-  binding.pry
-  nil
+end
