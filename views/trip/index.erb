@@ -1,4 +1,5 @@
 <h1>Trips</h1>
+<a href="/trips/new" class="button">New trip</a>
 
 <% if Trip.find_current() %>
 <% current = Trip.find_current() %>
@@ -10,18 +11,18 @@
       <h3><%= current.name() %></h3>
     </thead>
     <tr>
-    <% if current.budget() %>
+    <% if current.budget() > 0 %>
       <th>Spending money left:</th>
-      <td class="amount"><%= current.remaining_budget() %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(current.remaining_budget) %></td>
     <% else %>
       <th>Amount spent:</th>
-      <td class="amount"><%= current.expenditure_total() %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(current.expenditure_total) %></td>
     <% end %>
     </tr>
     </table>
 
-    <a href="/<%= current.id() %>/new">New transaction</a>
-    <a href="/<%= current.id()%>">See transactions</a>
+    <a href="/<%= current.id() %>/new" class="button">New transaction</a>
+    <a href="/<%= current.id()%>" class= "button">See transactions</a>
     <form class="delete" action="/<%= current.id() %>/delete" method="post">
         <input type="submit" value="Delete Trip" class="button">
     </form>
@@ -39,7 +40,7 @@
     </thead>
     <tr>
       <th>Amount spent:</th>
-      <td class="amount"><%= trip.expenditure_total() %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(trip.expenditure_total()) %></td>
     </tr>
     </table>
 

@@ -11,8 +11,8 @@ class Trip
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
-    @current = details["current"].downcase == "true" || details["current"] == "t" if details["current"]
-    @business = details["business"].downcase == "true" || details["business"] == "t"
+    @current = true if details["current"]
+    @business = true if details["business"]
     @timelog = details["timelog"]
   end
 
@@ -85,8 +85,7 @@ class Trip
   end
 
   def remaining_budget()
-    amount_left = @budget - expenditure_total
-    return Money.convert_to_decimal_string(amount_left)
+    return amount_left = @budget - expenditure_total
   end
 
   def unique_current()

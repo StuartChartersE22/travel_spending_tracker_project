@@ -2,6 +2,7 @@ require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 also_reload("../models/*.rb")
 require_relative("../models/trip.rb")
+require_relative("../models/money.rb")
 
 #INDEX
 get "/trips" do
@@ -14,9 +15,15 @@ get "/trips/new" do
 end
 
 #CREATE
-# post "/trips" do
-#
-# end
+post "/trips" do
+  @trip = Trip.new(params)
+  if Trip.all().length() != 0
+    @trip.save()
+  else
+    @trip.save_initial()
+  end
+  erb(:"trip/create")
+end
 
 #SHOW
 
