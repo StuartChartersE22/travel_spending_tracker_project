@@ -39,4 +39,11 @@ class Item
       return self.map_items(array_of_details)
     end
 
+    def self.find(id)
+      sql = "SELECT * FROM items WHERE id = $1"
+      values = [id]
+      details = SqlRunner.run(sql, values)[0]
+      return self.new(details)
+    end
+
 end

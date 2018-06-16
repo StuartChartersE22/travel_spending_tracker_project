@@ -37,4 +37,11 @@ class TransTag
       return self.map_relationships(array_of_details)
     end
 
+    def self.find(id)
+      sql = "SELECT * FROM trans_tags WHERE id = $1"
+      values = [id]
+      details = SqlRunner.run(sql, values)[0]
+      return self.new(details)
+    end
+
 end

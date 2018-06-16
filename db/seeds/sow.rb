@@ -55,5 +55,5 @@ trans_tags = TransTagSeeds.plant(transactions, tags)
 # binding.pry
 # nil
 
-# binding.pry
-# nil
+binding.pry
+nil

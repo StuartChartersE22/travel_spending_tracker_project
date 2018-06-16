@@ -48,4 +48,11 @@ class Trip
     return self.map_trips(array_of_details)
   end
 
+  def self.find(id)
+    sql = "SELECT * FROM trips WHERE id = $1"
+    values = [id]
+    details = SqlRunner.run(sql, values)[0]
+    return self.new(details)
+  end
+
 end

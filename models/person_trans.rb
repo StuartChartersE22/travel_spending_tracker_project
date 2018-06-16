@@ -40,4 +40,12 @@ class PersonTrans
       array_of_details = SqlRunner.run(sql)
       return self.map_relationships(array_of_details)
     end
+
+    def self.find(id)
+      sql = "SELECT * FROM people_trans WHERE id = $1"
+      values = [id]
+      details = SqlRunner.run(sql, values)[0]
+      return self.new(details)
+    end
+
 end
