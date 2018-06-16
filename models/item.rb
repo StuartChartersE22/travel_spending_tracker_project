@@ -3,8 +3,8 @@ require("pry")
 
 class Item
 
-  attr_reader(:id)
-  attr_accessor(:name)
+  attr_reader(:id, :transaction_id)
+  attr_accessor(:name, :amount)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
