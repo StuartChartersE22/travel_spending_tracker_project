@@ -1,10 +1,10 @@
-require("../db/sql_runner_money_tracker.rb")
+require_relative("../db/sql_runner_money_tracker.rb")
 require("pry")
 
 class Item
 
   attr_reader(:id, :transaction_id)
-  attr_accessor(:name, :amount)
+  attr_accessor(:name)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]

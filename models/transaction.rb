@@ -1,4 +1,4 @@
-require("../db/sql_runner_money_tracker.rb")
+require_relative("../db/sql_runner_money_tracker.rb")
 require("pry")
 
 class Transaction
