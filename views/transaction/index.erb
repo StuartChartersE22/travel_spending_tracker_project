@@ -1,1 +1,21 @@
 <h1><%= @trip.name() %></h1>
+
+<table>
+
+  <% if @trip.budget() > 0 %>
+    <tr>
+      <th>Spending money left:</th>
+      <td class="amount"><%= Money.convert_to_decimal_string(@trip.remaining_budget) %></td>
+    </tr>
+    <tr>
+      <th>Current budget:</th>
+      <td class="amount"><%= Money.convert_to_decimal_string(@trip.budget) %></td>
+    </tr>
+  <% else %>
+    <tr>
+      <th>Amount spent:</th>
+      <td class="amount"><%= Money.convert_to_decimal_string(@trip.expenditure_total) %></td>
+    </tr>
+  <% end %>
+
+</table>
