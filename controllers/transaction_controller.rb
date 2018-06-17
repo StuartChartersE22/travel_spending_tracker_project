@@ -5,7 +5,8 @@ also_reload("../controllers/*")
 require_relative("../models/transaction.rb")
 
 #INDEX
-get "/trip/:trip_id" do
+get "/trip/:id" do
+  @trip = Trip.find(params["id"].to_i())
   erb(:"transaction/index")
 end
 
