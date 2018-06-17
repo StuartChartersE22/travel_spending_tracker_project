@@ -1,6 +1,15 @@
-<h1><%= @trip.name() %></h1>
+<table class="transaction-overview">
 
-<table>
+<thead>
+  <h1><%= @trip.name() %></h1>
+  <p class="current-status">
+    <% if @trip.current() %>
+      current trip
+    <% else %>
+      not current trip
+    <% end %>
+  </p>
+</thead>
 
   <% if @trip.budget() > 0 %>
     <tr>
