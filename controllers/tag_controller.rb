@@ -15,7 +15,11 @@ get "/tags/new" do
 end
 
 #CREATE
-
+post "/tags/create" do
+  @tag = Tag.new(params)
+  @tag.save()
+  redirect to("/tags")
+end
 
 #SHOW
 
