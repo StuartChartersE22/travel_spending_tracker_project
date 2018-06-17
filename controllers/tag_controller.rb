@@ -9,9 +9,13 @@ get "/tags" do
   erb(:"tag/index")
 end
 
+#NEW
+get "/tags/new" do
+  erb(:"tag/new")
+end
+
 #CREATE
 
-#NEW
 
 #SHOW
 
