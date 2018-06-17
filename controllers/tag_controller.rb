@@ -5,6 +5,9 @@ also_reload("../controllers/*")
 require_relative("../models/tag.rb")
 
 #INDEX
+get "/tags" do
+  erb(:"tag/index")
+end
 
 #CREATE
 
