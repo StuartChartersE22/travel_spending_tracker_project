@@ -1,0 +1,9 @@
+<form class="tag-selection" action="/trans_tag//create/<%= @transaction.id() %>" method="post">
+  <select class="tag-options" name="tag_id">
+    <% for tag in Tag.all() %>
+      <option value="<%= tag.id() %>"><%= tag.name() %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Add tag">
+  <a href="/tags/new/<%= @transaction.id() %>">Create new tag</a>
+</form>

@@ -6,20 +6,19 @@ require_relative("../models/trans_tag.rb")
 
 #INDEX
 
-#CREATE
+#NEW
 get "/trans-tag/:id" do
   @transaction = Transaction.find(params["id"])
-  erb(:"trans_tag/create")
+  erb(:"trans_tag/new")
 end
 
-#NEW
-post "/trans_tag/:transaction_id" do
+
+#CREATE
+post "/trans_tag/create/:transaction_id" do
   @trans_tag = TransTag.new(params)
   @trans_tag.save()
   redirect to("/transaction/#{@trans_tag.transaction_id()}")
 end
-
-#SHOW
 
 #EDIT
 

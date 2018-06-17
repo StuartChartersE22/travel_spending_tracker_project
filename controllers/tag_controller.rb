@@ -21,6 +21,22 @@ post "/tags/create" do
   redirect to("/tags")
 end
 
+#NEW FROM TRANSACTION
+get "/tags/new/:id" do
+  @transaction = Transaction.find(params["id"].to_i())
+  erb(:"tag/new_from_trans")
+end
+
+#CREATE FROM TRANSACTION
+post "/tags/create/:transaction_id" do
+  @tag = Tag.new(params)
+  @tag.save()
+  params["tag_id"] = @tag.id()
+  @trans_tag = TransTag.new(params)
+  @trans_tag.save()
+  redirect to("/transaction/#{@trans_tag.transaction_id}")
+end
+
 #SHOW
 get "/tag/:id" do
   @tag = Tag.find(params["id"])
