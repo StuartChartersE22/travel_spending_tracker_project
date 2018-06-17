@@ -9,7 +9,16 @@
   <label for="amount">How much did you spend?</label>
   <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01" value="<%= Money.convert_to_decimal_string(@transaction.amount()) %>" required>
 
-  <label for="bussines">Bussiness trip?</label>
+  <label>
+    Trip you were on:
+    <select name="trip_id">
+      <% for trip in Trip.all() %>
+      <option value="<%= trip.id %>" <%= "selected" if @transaction.trip_id() == trip.id() %> ><%= trip.name %></option>
+      <% end %>
+    </select>
+  </label>
+
+  <label for="bussines">Bussiness expense?</label>
   <input type="checkbox" name="business" id="business" value="true" <%= "checked" if @transaction.business() %> >
 
   <label for="company">Where did you spend your money?</label>

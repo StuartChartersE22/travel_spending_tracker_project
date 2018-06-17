@@ -39,5 +39,13 @@ get "/transaction/:id/edit" do
 end
 
 #UPDATE
+post "/transaction/:id/update" do
+  params["amount"] += ".00" if params["amount"].count(".") == 0
+  params["name"] = params["date"] unless params["name"]
+  params["company"] = nil if params["company"] == ""
+  @transaction = Transaction.new(params)
+  @transaction.update()
+  erb(:"transaction/update")
+end
 
 #DELETE
