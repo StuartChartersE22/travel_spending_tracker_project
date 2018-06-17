@@ -10,7 +10,10 @@
     <% end %>
   </p>
 </thead>
-
+  <tr>
+    <th>Trip date:</th>
+    <td type="date"> <%= @trip.date %> </td>
+  </tr>
   <% if @trip.budget() > 0 %>
     <tr>
       <th>Spending money left:</th>

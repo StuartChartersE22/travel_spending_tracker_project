@@ -12,7 +12,7 @@ CREATE TABLE trips(
   budget INT,
   current BOOLEAN UNIQUE,
   business BOOLEAN,
-  timelog TIMESTAMP
+  timelog DATE
 );
 
 CREATE TABLE people(

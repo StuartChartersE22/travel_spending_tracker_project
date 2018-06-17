@@ -1,11 +1,12 @@
 require_relative("../db/sql_runner_money_tracker.rb")
 require_relative("./money.rb")
+require_relative("./date_time.rb")
 require("pry")
 
 class Trip
 
-  attr_reader(:id, :budget, :current, :business)
-  attr_accessor(:name, :timelog)
+  attr_reader(:id, :budget, :current, :business, :date)
+  attr_accessor(:name)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
@@ -13,7 +14,7 @@ class Trip
     @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
     @current = details["current"] ? true : nil
     @business = details["business"]=="true" || details["business"]=="t" ? true : false
-    @timelog = details["timelog"]
+    @date = (details["timelog"])
   end
 
 #Pure Ruby instance methods
@@ -53,7 +54,7 @@ class Trip
     VALUES
     ($1, $2, $3, $4, $5)
     RETURNING id"
-    values = [@name, @budget, @current, @business, @timelog]
+    values = [@name, @budget, @current, @business, @date]
     @id = SqlRunner.run(sql, values)[0]["id"].to_i()
   end
 
@@ -64,7 +65,7 @@ class Trip
     VALUES
     ($1, $2, $3, $4, $5)
     RETURNING id"
-    values = [@name, @budget, @current, @business, @timelog]
+    values = [@name, @budget, @current, @business, @date]
     @id = SqlRunner.run(sql, values)[0]["id"].to_i()
   end
 
@@ -80,7 +81,7 @@ class Trip
     sql = "UPDATE trips
     SET (name, budget, current, business, timelog) = ($1, $2, $3, $4, $5)
     WHERE id = $6"
-    values = [@name, @budget, @current, @business, @timelog, @id]
+    values = [@name, @budget, @current, @business, @date, @id]
     SqlRunner.run(sql, values)
   end
 
