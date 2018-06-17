@@ -1,4 +1,5 @@
 require_relative("../db/sql_runner_money_tracker.rb")
+require_relative("./transaction.rb")
 require_relative("./money.rb")
 require_relative("./date_time.rb")
 require("pry")
@@ -105,6 +106,14 @@ class Trip
     end
   end
 
+  def find_transactions()
+    sql = "SELECT * FROM transactions WHERE transactions.trip_id = $1"
+    values = [@id]
+    details = SqlRunner.run(sql,values)
+    return nil if details.values().length() == 0
+    return Transaction.map_transactions(details)
+  end
+
 #SQL class methods
   def self.delete_all()
     sql = "DELETE FROM trips"
@@ -130,7 +139,7 @@ class Trip
     if details.values().length() != 0
       return self.new(details[0])
     else
-      return false
+      return nil
     end
   end
 
