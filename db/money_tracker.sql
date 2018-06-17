@@ -30,7 +30,7 @@ CREATE TABLE transactions(
   name VARCHAR(255),
   trip_id INT4 REFERENCES trips(id) ON DELETE CASCADE,
   amount INT NOT NULL,
-  timelog TIMESTAMP,
+  timelog DATE NOT NULL,
   business BOOLEAN,
   company VARCHAR(255)
 );

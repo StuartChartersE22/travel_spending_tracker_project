@@ -5,7 +5,7 @@ require("pry")
 
 class Transaction
 
-  attr_reader(:id, :trip_id, :amount, :date, :time, :business)
+  attr_reader(:id, :trip_id, :amount, :date, :business)
   attr_accessor(:name, :company)
 
   def initialize(details)
@@ -13,8 +13,7 @@ class Transaction
     @name = details["name"]
     @trip_id = details["trip_id"].to_i()
     @amount = Money.convert_to_integer(details["amount"])
-    @date = DateTime.split_for_ruby(details["timelog"])[0]
-    @time = DateTime.split_for_ruby(details["timelog"])[1]
+    @date = details["timelog"]
     @business = details["business"]=="true" || details["business"]=="t" ? true : false
     @company = details["company"] if details["company"]
   end
@@ -40,7 +39,7 @@ class Transaction
       VALUES
       ($1, $2, $3, $4, $5, $6)
       RETURNING id"
-      values = [@name, @trip_id, @amount, DateTime.combine_for_sql(@date, @time), @business, @company]
+      values = [@name, @trip_id, @amount, @date, @business, @company]
       @id = SqlRunner.run(sql, values)[0]["id"].to_i()
     end
 
@@ -55,7 +54,7 @@ class Transaction
       sql = "UPDATE transactions
       SET (name, trip_id, amount, timelog, business, company) = ($1, $2, $3, $4, $5, $6)
       WHERE id = $7"
-      values = [@name, @trip_id, @amount, @timelog, @business, @company, @id]
+      values = [@name, @trip_id, @amount, @date, @business, @company, @id]
       SqlRunner.run(sql, values)
     end
 
