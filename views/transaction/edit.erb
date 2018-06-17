@@ -1,0 +1,20 @@
+<form class="details-form" action="/transaction/<%= @transaction.id %>/update" method="post">
+
+  <label for="date">Date of the transaction:</label>
+  <input type="date" name="timelog" id="date" value=<%= @transaction.date() %>>
+
+  <label for="name">How to identify the transaction?</label>
+  <input type="text" name="name" placeholder="optional" value="<%= @transaction.name() %>">
+
+  <label for="amount">How much did you spend?</label>
+  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01" value="<%= Money.convert_to_decimal_string(@transaction.amount()) %>" required>
+
+  <label for="bussines">Bussiness trip?</label>
+  <input type="checkbox" name="business" id="business" value="true" <%= "checked" if @transaction.business() %> >
+
+  <label for="company">Where did you spend your money?</label>
+  <input type="text" name="company" id="company" placeholder="Optional" value="<%= @transaction.company() %>">
+
+  <input type="submit" value="That's better!" class="button">
+  <a href="/transaction/<%= @transaction.id %>" class="button">I liked the original</a>
+</form>

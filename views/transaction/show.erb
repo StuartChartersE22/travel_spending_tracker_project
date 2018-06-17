@@ -26,6 +26,7 @@
       <th>Whilst on:</th>
       <td><%= Trip.find(@transaction.trip_id()).name() %></td>
     </tr>
+    <tr><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></tr>
     <tr><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></tr>
   </tbody>
 
