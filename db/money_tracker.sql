@@ -47,7 +47,7 @@ CREATE TABLE people_trans(
   transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
   person_id INT4 REFERENCES people(id) ON DELETE CASCADE,
   owe INT,
-  timelog TIMESTAMP
+  timelog DATE
 );
 
 CREATE TABLE trans_tags(

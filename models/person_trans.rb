@@ -4,15 +4,14 @@ require("pry")
 
 class PersonTrans
 
-  attr_reader(:id, :transaction_id, :person_id, :owe)
-  attr_accessor(:timelog)
+  attr_reader(:id, :transaction_id, :person_id, :owe, :date)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @transaction_id = details["transaction_id"].to_i()
     @person_id = details["person_id"].to_i()
     @owe = Money.convert_to_integer(details["owe"])
-    @timelog = details["timelog"]
+    @date = details["timelog"]
   end
 
   #Pure Ruby instance methods
@@ -34,7 +33,7 @@ class PersonTrans
       sql = "INSERT INTO people_trans
       (transaction_id, person_id, owe, timelog) VALUES ($1, $2, $3, $4)
       RETURNING id"
-      values = [@transaction_id, @person_id, @owe, @timelog]
+      values = [@transaction_id, @person_id, @owe, @date]
       @id = SqlRunner.run(sql, values)[0]["id"].to_i()
     end
 
@@ -49,7 +48,7 @@ class PersonTrans
       sql = "UPDATE people_trans
       SET (transaction_id, person_id, owe, timelog) = ($1, $2, $3, $4)
       WHERE id = $5"
-      values = [@transaction_id, @person_id, @owe, @timelog, @id]
+      values = [@transaction_id, @person_id, @owe, @date, @id]
       SqlRunner.run(sql, values)
     end
 
