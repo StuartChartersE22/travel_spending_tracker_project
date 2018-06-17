@@ -23,7 +23,7 @@ post "/trip/:trip_id/create" do
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.save()
-  erb(:"transaction/create")
+  redirect to("/trip/#{@transaction.trip_id()}")
 end
 
 #SHOW
@@ -45,7 +45,13 @@ post "/transaction/:id/update" do
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.update()
-  erb(:"transaction/update")
+  redirect to("/transaction/#{@transaction.id()}")
 end
 
 #DELETE
+post "/transaction/:id/delete" do
+  @transaction = Transaction.find(params["id"].to_i())
+  trip_id = @transaction.trip_id()
+  @transaction.delete()
+  redirect to("/trip/#{trip_id}")
+end
