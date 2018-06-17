@@ -28,7 +28,7 @@ CREATE TABLE tags(
 CREATE TABLE transactions(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
-  trip_id INT4 REFERENCES trips(id),
+  trip_id INT4 REFERENCES trips(id) ON DELETE CASCADE,
   amount INT,
   timelog TIMESTAMP,
   business BOOLEAN,
@@ -39,19 +39,19 @@ CREATE TABLE items(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
   amount INT,
-  transaction_id INT4 REFERENCES transactions(id)
+  transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE people_trans(
   id SERIAL4 PRIMARY KEY,
-  transaction_id INT4 REFERENCES transactions(id),
-  person_id INT4 REFERENCES people(id),
+  transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
+  person_id INT4 REFERENCES people(id) ON DELETE CASCADE,
   owe INT,
   timelog TIMESTAMP
 );
 
 CREATE TABLE trans_tags(
   id SERIAL4 PRIMARY KEY,
-  transaction_id INT4 REFERENCES transactions(id),
-  tag_id INT4 REFERENCES tags(id)
+  transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
+  tag_id INT4 REFERENCES tags(id) ON DELETE CASCADE
 );

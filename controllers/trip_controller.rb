@@ -15,18 +15,18 @@ get "/trips/new" do
 end
 
 #CREATE
-post "/trips" do
+post "/trips/create" do
   @trip = Trip.new(params)
   if Trip.all().length() != 0
     @trip.save()
   else
     @trip.save_initial()
   end
-  redirect to("/trips/<%= @trip.id() %>")
+  redirect to ("/trips")
 end
 
 #SHOW
-#goes to /:id which is the transaction index
+#goes to /trip/:id which is the transaction index
 
 #EDIT
 get "/trips/:id/edit" do
@@ -41,4 +41,11 @@ post "/trips/:id" do
   redirect to ("/trips")
 end
 
+#DELETE conformation
+
 #DELETE
+post "/trips/:id/delete" do
+  @trip = Trip.find(params["id"].to_i())
+  @trip.delete()
+  redirect to ("/trips")
+end
