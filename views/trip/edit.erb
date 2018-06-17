@@ -1,8 +1,8 @@
 <form class="details-form" action="/trips/<%= @trip.id()%>" method="post">
   <input type="text" name="name" value="<%= @trip.name() %>">
 
-  <label for="time-log">Date of the trip:</label>
-  <input type="date" name="timelog" id="time-log" value=<%= @trip.timelog() %>>
+  <label for="date">Date of the trip:</label>
+  <input type="date" name="date" id="date" value=<%= @trip.date() %>>
 
   <label for="current">Is this your current trip?</label>
   <input type="checkbox" name="current" id="current" value="true" <%= "checked" if @trip.current() %> >
