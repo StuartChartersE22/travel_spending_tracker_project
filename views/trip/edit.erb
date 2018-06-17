@@ -5,7 +5,7 @@
   <input type="date" name="timelog" id="time-log" value=<%= @trip.timelog() %>>
 
   <label for="current">Is this your current trip?</label>
-  <input type="checkbox" name="current" id="current" value="true">
+  <input type="checkbox" name="current" id="current" value="true" <%= "checked" if @trip.current() %> >
 
   <label for="budget">What is your spend goal?</label>
   <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
