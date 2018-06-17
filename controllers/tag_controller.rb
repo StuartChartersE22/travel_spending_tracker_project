@@ -41,3 +41,8 @@ post "/tag/:id/update" do
 end
 
 #DELETE
+post "/tag/:id/delete" do
+  @tag = Tag.find(params["id"].to_i())
+  @tag.delete()
+  redirect to("/tags")
+end
