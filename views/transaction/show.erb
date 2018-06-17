@@ -28,6 +28,9 @@
     </tr>
     <tr><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></tr>
     <tr><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></tr>
+    <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+        <input type="submit" value="Delete Transaction">
+    </form>
   </tbody>
 
 </table>

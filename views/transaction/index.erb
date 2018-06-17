@@ -59,6 +59,9 @@
         <tfoot>
           <a href="/transaction/<%= transaction.id %>">Details of transaction</a>
           <a href="/transaction/<%= transaction.id() %>/edit" class="button">Edit</a>
+          <form class="delete button" action="/transaction/<%= transaction.id() %>/delete" method="post">
+              <input type="submit" value="Delete Transaction">
+          </form>
         </tfoot>
       </table>
     <% end %>
