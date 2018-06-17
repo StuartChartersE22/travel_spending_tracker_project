@@ -8,7 +8,7 @@ DROP TABLE trips;
 
 CREATE TABLE trips(
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
   budget INT,
   current BOOLEAN UNIQUE,
   business BOOLEAN,
@@ -17,19 +17,19 @@ CREATE TABLE trips(
 
 CREATE TABLE people(
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255)
+  name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE tags(
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255)
+  name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE transactions(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
   trip_id INT4 REFERENCES trips(id) ON DELETE CASCADE,
-  amount INT,
+  amount INT NOT NULL,
   timelog TIMESTAMP,
   business BOOLEAN,
   company VARCHAR(255)

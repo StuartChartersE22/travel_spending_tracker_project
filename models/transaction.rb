@@ -1,20 +1,22 @@
 require_relative("../db/sql_runner_money_tracker.rb")
 require_relative("./money.rb")
+require_relative("./date_time.rb")
 require("pry")
 
 class Transaction
 
-  attr_reader(:id, :trip_id, :amount)
-  attr_accessor(:name, :timelog, :business, :company)
+  attr_reader(:id, :trip_id, :amount, :date, :time, :business)
+  attr_accessor(:name, :company)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @trip_id = details["trip_id"].to_i()
     @amount = Money.convert_to_integer(details["amount"])
-    @timelog = details["timelog"]
-    @business = details["business"].downcase() == "t" || details["business"].downcase() == "true"
-    @company = details["company"]
+    @date = DateTime.split_for_ruby(details["timelog"])[0]
+    @time = DateTime.split_for_ruby(details["timelog"])[1]
+    @business = details["business"]=="true" || details["business"]=="t" ? true : false
+    @company = details["company"] if details["company"]
   end
 
   #Pure Ruby instance methods
@@ -38,7 +40,7 @@ class Transaction
       VALUES
       ($1, $2, $3, $4, $5, $6)
       RETURNING id"
-      values = [@name, @trip_id, @amount, @timelog, @business, @company]
+      values = [@name, @trip_id, @amount, DateTime.combine_for_sql(@date, @time), @business, @company]
       @id = SqlRunner.run(sql, values)[0]["id"].to_i()
     end
 
