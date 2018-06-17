@@ -11,8 +11,8 @@ class Trip
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
     @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
-    @current = true if details["current"]
-    @business = true if details["business"]
+    @current = details["current"] ? true : nil
+    @business = details["business"]=="true" || details["business"]=="t" ? true : false
     @timelog = details["timelog"]
   end
 
@@ -23,6 +23,14 @@ class Trip
 
   def change_budget(decimal_string)
     @budget = Money.convert_to_integer(decimal_string)
+  end
+
+  def make_business()
+    @bussines = true
+  end
+
+  def make_not_business()
+    @bussiness = false
   end
 
   def make_current()

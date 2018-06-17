@@ -10,13 +10,14 @@ class TripSeeds
       "name" => "Family holiday",
       "budget" => "500.00",
       "current" => "true",
-      "business" => "false",
+      "business" => nil,
       "timelog" => "2018-10-13"
     })
 
     trip2 = Trip.new({
       "name" => "Business trip",
       "budget" => "200.00",
+      "current" => nil,
       "business" => "true",
       "timelog" => "2018-05-06"
     })

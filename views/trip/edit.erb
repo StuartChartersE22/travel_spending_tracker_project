@@ -1,0 +1,18 @@
+<form class="details-form" action="/trips/<%= @trip.id()%>" method="post">
+  <input type="text" name="name" value="<%= @trip.name() %>">
+
+  <label for="time-log">Date of the trip:</label>
+  <input type="date" name="timelog" id="time-log" value=<%= @trip.timelog() %>>
+
+  <label for="current">Is this your current trip?</label>
+  <input type="checkbox" name="current" id="current" value="true">
+
+  <label for="budget">What is your spend goal?</label>
+  <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
+
+  <label for="business">Business trip?</label>
+  <input type="checkbox" name="business" id="business" value="true" >
+
+  <input type="submit" value="That's better!" class="button">
+  <a href="/trips" class="button">I liked the original</a>
+</form>

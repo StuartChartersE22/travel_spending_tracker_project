@@ -22,13 +22,23 @@ post "/trips" do
   else
     @trip.save_initial()
   end
-  erb(:"trip/create")
+  redirect to("/trips/<%= @trip.id() %>")
 end
 
 #SHOW
+#goes to /:id which is the transaction index
 
 #EDIT
+get "/trips/:id/edit" do
+  @trip = Trip.find(params["id"].to_i())
+  erb(:"trip/edit")
+end
 
 #UPDATE
+post "/trips/:id" do
+  @trip = Trip.new(params)
+  @trip.update()
+  redirect to ("/trips")
+end
 
 #DELETE

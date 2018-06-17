@@ -5,7 +5,7 @@ also_reload("../controllers/*")
 require_relative("../models/transaction.rb")
 
 #INDEX
-get "/:trip_id" do
+get "/trip/:trip_id" do
   erb(:"transaction/index")
 end
 
