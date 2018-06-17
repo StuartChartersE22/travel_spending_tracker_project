@@ -11,7 +11,7 @@
   <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
 
   <label for="business">Business trip?</label>
-  <input type="checkbox" name="business" id="business" value="true" >
+  <input type="checkbox" name="business" id="business" value="true" <%= "checked" if @trip.business() %> >
 
   <input type="submit" value="That's better!" class="button">
   <a href="/trips" class="button">I liked the original</a>

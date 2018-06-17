@@ -4,7 +4,7 @@ require("pry")
 
 class Trip
 
-  attr_reader(:id, :budget, :current)
+  attr_reader(:id, :budget, :current, :business)
   attr_accessor(:name, :timelog)
 
   def initialize(details)
