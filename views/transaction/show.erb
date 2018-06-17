@@ -1,0 +1,32 @@
+<table class="transactions-overview">
+
+  <thead>
+    <h3><%= @transaction.name() %></h3>
+    <p><%= @transaction.date() %></p>
+    <p><% if @transaction.business() %>
+        Business expense
+      <% else %>
+        Non-business
+      <% end %>
+    </p>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th>Spent:</th>
+      <td> <%= Money.convert_to_decimal_string(@transaction.amount()) %> </td>
+    </tr>
+    <% if @transaction.company() %>
+      <tr>
+        <th>Spent at:</th>
+        <td> <%= @transaction.company() %> </td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Whilst on:</th>
+      <td><%= Trip.find(@transaction.trip_id()).name() %></td>
+    </tr>
+    <tr><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></tr>
+  </tbody>
+
+</table>

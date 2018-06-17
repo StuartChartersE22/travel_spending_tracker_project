@@ -1,4 +1,4 @@
-<table class="transaction-overview">
+<table class="transactions-overview">
 
 <thead>
   <h2><%= @trip.name() %></h2>
@@ -56,7 +56,9 @@
             </tr>
           <% end %>
         </tbody>
-
+        <tfoot>
+          <a href="/transaction/<%= transaction.id %>">Details of transaction</a>
+        </tfoot>
       </table>
     <% end %>
   <% else %>

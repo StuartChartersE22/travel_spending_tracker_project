@@ -27,9 +27,14 @@ post "/trip/:trip_id/create" do
 end
 
 #SHOW
+get "/transaction/:id" do
+  @transaction = Transaction.find(params["id"].to_i())
+  erb(:"transaction/show")
+end
 
 #EDIT
 
 #UPDATE
+
 
 #DELETE
