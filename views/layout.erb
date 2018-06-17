@@ -9,6 +9,13 @@
     <nav>
       <ul>
         <li> <a href="/trips">Trips</a> </li>
+        <li>
+          <% if current = Trip.find_current() %>
+            <a href="/trip/<%= current.id() %>">Current Trip</a>
+          <% else %>
+            <p>No Current Trip</p>
+          <% end %>
+        </li>
       </ul>
     </nav>
     <%= yield %>
