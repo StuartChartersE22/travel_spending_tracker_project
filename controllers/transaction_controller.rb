@@ -10,9 +10,16 @@ get "/trip/:id" do
   erb(:"transaction/index")
 end
 
-#CREATE
-
 #NEW
+get "/trip/:id/new" do
+  @trip = Trip.find(params["id"].to_i())
+  erb(:"/transaction/new")
+end
+
+#CREATE
+post "/trip/:id/create" do
+
+end
 
 #SHOW
 

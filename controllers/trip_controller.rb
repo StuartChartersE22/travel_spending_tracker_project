@@ -16,6 +16,7 @@ end
 
 #CREATE
 post "/trips/create" do
+  params["budget"] += ".00" if params["budget"].count(".") == 0
   @trip = Trip.new(params)
   if Trip.all().length() != 0
     @trip.save()

@@ -12,7 +12,7 @@ class Trip
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
-    @budget = Money.convert_to_integer(details["budget"]) if details["budget"]
+    @budget = Money.convert_to_integer(details["budget"])
     @current = details["current"] ? true : nil
     @business = details["business"]=="true" || details["business"]=="t" ? true : false
     @date = (details["timelog"])
