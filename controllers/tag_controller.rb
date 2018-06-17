@@ -22,6 +22,10 @@ post "/tags/create" do
 end
 
 #SHOW
+get "/tag/:id" do
+  @tag = Tag.find(params["id"])
+  erb(:"tag/show")
+end
 
 #EDIT
 
