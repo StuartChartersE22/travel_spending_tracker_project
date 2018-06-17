@@ -51,4 +51,11 @@ class TransTag
       return self.new(details)
     end
 
+    def self.find_by_relationship(relationship)
+      sql = "SELECT * FROM trans_tags WHERE trans_tag.transaction_id = $1 AND trans_tag.tag_id = $2"
+      values = [relationship["transaction_id"], releationship["tag_id"]]
+      details = SqlRunner.run(sql, values)[0]
+      return self.new(details)
+    end
+
 end

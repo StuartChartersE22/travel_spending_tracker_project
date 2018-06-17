@@ -30,7 +30,9 @@
       <th>Tags:</th>
       <td><ul>
         <% for tag in @transaction.find_tags() %>
-          <li><%= tag.name() %></li>
+          <li><%= tag.name() %> <form class="delete" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
+            <input type="submit" value="Remove">
+          </form> </li>
         <% end %>
         <li><a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></li>
       </ul></td>
