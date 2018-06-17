@@ -29,7 +29,7 @@
       <td class="amount"><%= Money.convert_to_decimal_string(@trip.expenditure_total) %></td>
     </tr>
   <% end %>
-
+  <tr><a href="/trip/<%= @trip.id() %>/new" class="button">New transaction</a></tr>
 </table>
 
 <ul>
