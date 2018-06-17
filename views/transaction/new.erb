@@ -1,13 +1,13 @@
 <form class="details-form" action="/trip/<%= @trip.id() %>/create" method="post">
 
-  <label for="time-log">Date of the trip:</label>
-  <input type="date" name="timelog" id="time-log" value=<%= Time.now %>>
+  <label for="date">Date of the trip:</label>
+  <input type="date" name="timelog" id="date" value=<%= Time.now %>>
 
   <label for="name">How to identify the transaction?</label>
-  <input type="text" name="name" value="optional">
+  <input type="text" name="name" placeholder="optional">
 
   <label for="amount">How much did you spend?</label>
-  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01">
+  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01" required>
 
   <label for="bussines">Bussiness trip?</label>
   <input type="checkbox" name="business" id="business" value="true" <%= "checked" if @trip.business() %> >

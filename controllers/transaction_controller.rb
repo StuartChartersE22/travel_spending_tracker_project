@@ -17,8 +17,13 @@ get "/trip/:id/new" do
 end
 
 #CREATE
-post "/trip/:id/create" do
-
+post "/trip/:trip_id/create" do
+  params["amount"] += ".00" if params["amount"].count(".") == 0
+  params["name"] = params["date"] unless params["name"]
+  params["company"] = nil if params["company"] == ""
+  @transaction = Transaction.new(params)
+  @transaction.save()
+  erb(:"transaction/create")
 end
 
 #SHOW
