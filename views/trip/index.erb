@@ -8,7 +8,7 @@
 
     <table>
     <thead>
-      <h3><%= current.name() %></h3>
+      <a href="/trip/<%= current.id()%>" class="trip-name"><h3><%= current.name() %></h3></a>
     </thead>
     <tr>
     <% if current.budget() > 0 %>
@@ -36,7 +36,7 @@
   <% for trip in Trip.all_but_current() %>
   <li><table>
     <thead>
-      <h3><%= trip.name() %></h3>
+      <a href="/trip/<%= trip.id()%>" class="trip-name"><h3><%= trip.name() %></h3></a>
     </thead>
     <tr>
       <th>Amount spent:</th>
