@@ -1,14 +1,14 @@
 <table class="transactions-overview">
 
   <thead>
-    <h3><%= @transaction.name() %></h3>
-    <p><%= @transaction.date() %></p>
-    <p><% if @transaction.business() %>
+    <th><h3><%= @transaction.name() %></h3></th>
+    <td><p><%= @transaction.date() %></p></td>
+    <td><p><% if @transaction.business() %>
         Business expense
       <% else %>
         Non-business
       <% end %>
-    </p>
+    </p></td>
   </thead>
 
   <tbody>
@@ -26,11 +26,24 @@
       <th>Whilst on:</th>
       <td><%= Trip.find(@transaction.trip_id()).name() %></td>
     </tr>
-    <tr><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></tr>
-    <tr><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></tr>
-    <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
-        <input type="submit" value="Delete Transaction">
-    </form>
+    <tr>
+      <th>Tags:</th>
+      <td><ul>
+        <% for tag in @transaction.find_tags() %>
+          <li><%= tag.name() %></li>
+        <% end %>
+        <li><a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></li>
+      </ul></td>
+    </tr>
   </tbody>
-
+  <tfoot>
+    <tr>
+      <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
+      <td><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></td>
+      <td>
+        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+        <input type="submit" value="Delete Transaction">
+      </form></td>
+    </tr>
+  </tfoot>
 </table>
