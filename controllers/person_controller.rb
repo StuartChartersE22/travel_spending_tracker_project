@@ -34,5 +34,15 @@ get "/person/:id/edit" do
 end
 
 #UPDATE
+post "/person/:id/update" do
+  @person = Person.new(params)
+  @person.update()
+  redirect to("/person/#{@person.id()}")
+end
 
 #DELETE
+post "/person/:id/delete" do
+  @person = Person.find(params["id"])
+  @person.delete()
+  redirect to("/people")
+end
