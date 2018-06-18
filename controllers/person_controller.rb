@@ -28,6 +28,9 @@ get "/person/:id" do
 end
 
 #EDIT
+get "/person/:id/edit"
+  @person = Person.find(params["id"])
+end
 
 #UPDATE
 
