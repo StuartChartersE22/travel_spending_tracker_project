@@ -10,9 +10,8 @@
 <h3>They owe you for:</h3>
 <ul>
   <% for transaction in @person.find_transactions() %>
-    <li> <a href="/transaction/<%= transaction.id() %>"><% if transaction.name().length == 0 %>
-      <h4><%= transaction.date() %></h4>
-      <% elsif transaction.name().match?("Lent") %>
+    <li> <a href="/transaction/<%= transaction.id() %>">
+      <% if transaction.name().match?("Lent") %>
         <h4>Borrowed on <%= transaction.find_trip().name() %></h4>
       <% else %>
         <h4><%= transaction.name() %></h4>

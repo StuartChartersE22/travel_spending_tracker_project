@@ -2,12 +2,7 @@
   <select class="owing-options" name="transaction_id">
     <% for transaction in @transactions %>
       <option value="<%= transaction.id() %>">
-        <% if transaction.name().length > 0 %>
-        <p><%= transaction.name() %></p>
-        <% else %>
-        <p><%= transaction.date() %></p>
-        <% end %>
-        on <%= transaction.find_trip().name() %>
+        <p><%= transaction.name() %> on <%= transaction.find_trip().name() %> </p>
       </option>
     <% end %>
   </select>

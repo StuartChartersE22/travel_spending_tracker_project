@@ -38,11 +38,11 @@
     <% for transaction in transactions %>
       <table>
         <thead>
-          <% if transaction.name().length > 0 %>
+          <% if transaction.name() == transaction.date() %>
+            <h3><%= transaction.name() %></h3>
+          <% else %>
             <h3><%= transaction.name() %></h3>
             <p> <%= transaction.date() %> </p>
-          <% else %>
-            <h3><%= transaction.date() %></h3>
           <% end %>
         </thead>
         <tbody>

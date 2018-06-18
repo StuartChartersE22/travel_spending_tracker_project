@@ -30,6 +30,7 @@ end
 
 #CREATE FROM PERSON FOR TRIP
 post "/person_trans/create/:person_id/person/trip" do
+  params["owe"] += ".00" if params["owe"].count(".") == 0
   @person = Person.find(params["person_id"].to_i())
   @trip = Trip.find(params["trip_id"].to_i())
   params["name"] = "Lent"

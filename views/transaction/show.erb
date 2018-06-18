@@ -1,11 +1,11 @@
 <table class="transactions-overview">
 
   <thead>
-    <th><h3><% if @transaction.name().length > 0 %>
+    <th><h3><% if @transaction.name() == @transaction.date() %>
+      <%= @transaction.name() %></h3></th>
+    <% else %>
       <%= @transaction.name() %></h3></th>
       <td><p><%= @transaction.date() %></p></td>
-    <% else %>
-      <%= @transaction.date() %></h3></th>
     <% end %>
 
     <td><p><% if @transaction.business() %>
