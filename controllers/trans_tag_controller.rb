@@ -8,7 +8,7 @@ require_relative("../models/trans_tag.rb")
 post "/trans_tag/:transaction_id/:tag_id/delete" do
   @trans_tag = TransTag.find_by_relationship(params)
   @trans_tag.delete()
-  redirect to("/transaction/#{params["transaction_id()"]}")
+  redirect to("/transaction/#{params["transaction_id"]}")
 end
 
 #NEW
