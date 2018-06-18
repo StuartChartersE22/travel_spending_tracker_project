@@ -32,7 +32,7 @@ end
 post "/person_trans/create/:person_id/person/trip" do
   @person = Person.find(params["person_id"].to_i())
   @trip = Trip.find(params["trip_id"].to_i())
-  params["name"] = "Lent to <a href='/person/#{@person.id()}'>#{@person.name()}</a>"
+  params["name"] = "Lent"
   params["timelog"] = @trip.date() if params["timelog"] == ""
   params["amount"] = params["owe"]
   @transaction = Transaction.new(params)
