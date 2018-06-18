@@ -1,8 +1,13 @@
 <table class="transactions-overview">
 
   <thead>
-    <th><h3><%= @transaction.name() %></h3></th>
-    <td><p><%= @transaction.date() %></p></td>
+    <th><h3><% if @transaction.name().length > 0 %>
+      <%= @transaction.name() %></h3></th>
+      <td><p><%= @transaction.date() %></p></td>
+    <% else %>
+      <%= @transaction.date() %></h3></th>
+    <% end %>
+
     <td><p><% if @transaction.business() %>
         Business expense
       <% else %>

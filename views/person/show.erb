@@ -1,7 +1,7 @@
 <h2><%= @person.name() %></h2>
 <a href="/person/<%= @person.id() %>/edit">Edit name</a>
 <a href="/people" class="button">To list of people</a>
-<a href="/person_trans/<%= @person.id() %>/person">Add owing</a>
+<a href="/person_trans/<%= @person.id() %>/person">Add owing to transaction</a>
 <form class="delete button" action="/person/<%= @person.id() %>/delete" method="post">
     <input type="submit" value="Remove record">
 </form>
