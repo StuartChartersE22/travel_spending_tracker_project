@@ -28,8 +28,9 @@ get "/person/:id" do
 end
 
 #EDIT
-get "/person/:id/edit"
+get "/person/:id/edit" do
   @person = Person.find(params["id"])
+  erb(:"person/edit")
 end
 
 #UPDATE

@@ -1,5 +1,5 @@
 <h2><%= @person.name() %></h2>
-<a href="/tag/<%= @person.id() %>/edit">Edit name</a>
+<a href="/person/<%= @person.id() %>/edit">Edit name</a>
 <a href="/people" class="button">To list of people</a>
 <form class="delete button" action="/person/<%= @person.id() %>/delete" method="post">
     <input type="submit" value="Delete Tag">
