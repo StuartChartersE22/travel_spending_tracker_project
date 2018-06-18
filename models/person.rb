@@ -50,6 +50,12 @@ class Person
       return Transaction.map_transactions(trans_details)
     end
 
+    def find_owing_for_transaction(trans_id)
+      sql = "SELECT SUM(owe) FROM people_trans WHERE people_trans.person_id = $1"
+      values = [@id]
+      return SqlRunner.run(sql, values).values()[0][0].to.i()
+    end
+
   #SQL class methods
     def self.delete_all()
       sql = "DELETE FROM people"

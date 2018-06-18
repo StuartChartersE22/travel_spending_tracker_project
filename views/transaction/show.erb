@@ -2,10 +2,12 @@
 
   <thead>
     <th><h3><% if @transaction.name() == @transaction.date() %>
-      <%= @transaction.name() %></h3></th>
-    <% else %>
-      <%= @transaction.name() %></h3></th>
-      <td><p><%= @transaction.date() %></p></td>
+        <%= @transaction.name() %></h3></th>
+      <% elsif @transaction.name() == "Lent" %>
+        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a> 
+      <% else %>
+        <%= @transaction.name() %></h3></th>
+        <td><p><%= @transaction.date() %></p></td>
     <% end %>
 
     <td><p><% if @transaction.business() %>
@@ -43,6 +45,17 @@
         <li><a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></li>
       </ul></td>
     </tr>
+    <% unless @transaction.name() == "Lent" %>
+    <tr>
+      <th>People who have borrowed on this trip</th>
+      <td> <ul>
+        <% for person in @people %>
+          <li> <%= person.name() %> </li>
+          <li><%= Money.convert_to_decimal_string(person.find_owing_for_transaction(@transaction.id())) %></li>
+        <% end %>
+      </ul> </td>
+    </tr>
+    <% end %>
   </tbody>
   <tfoot>
     <tr>

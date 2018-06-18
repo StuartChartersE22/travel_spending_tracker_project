@@ -18,7 +18,7 @@
   <% if @trip.budget() > 0 %>
     <tr>
       <th>Spending money left:</th>
-      <td class="amount"><%= Money.convert_to_decimal_string(@trip.remaining_budget) %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(@remaining_budget) %></td>
     </tr>
     <tr>
       <th>Current budget:</th>
@@ -27,40 +27,43 @@
   <% else %>
     <tr>
       <th>Amount spent:</th>
-      <td class="amount"><%= Money.convert_to_decimal_string(@trip.expenditure_total) %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(@expenditure_total) %></td>
     </tr>
   <% end %>
   <tr><a href="/trip/<%= @trip.id() %>/new" class="button">New transaction</a></tr>
 </table>
 
 <ul>
-  <% if transactions = @trip.find_transactions() %>
-    <% for transaction in transactions %>
+  <% if @transactions %>
+    <% for transaction in @transactions %>
       <table>
         <thead>
-          <% if transaction.name() == transaction.date() %>
-            <h3><%= transaction.name() %></h3>
+          <% if transaction[0].name() == transaction[0].date() %>
+            <h3><%= transaction[0].name() %></h3>
+          <% elsif transaction[0].name() == "Lent" %>
+            <h3>Lent to <a href="/person/<%= transaction[1][0].id() %>"><%= transaction[1][0].name() %></a></h3>
+            <p> <%= transaction[0].date() %> </p>
           <% else %>
-            <h3><%= transaction.name() %></h3>
-            <p> <%= transaction.date() %> </p>
+            <h3><%= transaction[0].name() %></h3>
+            <p> <%= transaction[0].date() %> </p>
           <% end %>
         </thead>
         <tbody>
           <tr>
             <th>Spent:</th>
-            <td> <%= Money.convert_to_decimal_string(transaction.amount()) %> </td>
+            <td> <%= Money.convert_to_decimal_string(transaction[0].amount()) %> </td>
           </tr>
-          <% if transaction.company() %>
+          <% if transaction[0].company() %>
             <tr>
               <th>Spent at:</th>
-              <td> <%= transaction.company() %> </td>
+              <td> <%= transaction[0].company() %> </td>
             </tr>
           <% end %>
         </tbody>
         <tfoot>
-          <a href="/transaction/<%= transaction.id %>">Details of transaction</a>
-          <a href="/transaction/<%= transaction.id() %>/edit" class="button">Edit</a>
-          <form class="delete button" action="/transaction/<%= transaction.id() %>/delete" method="post">
+          <a href="/transaction/<%= transaction[0].id %>">Details of transaction</a>
+          <a href="/transaction/<%= transaction[0].id() %>/edit" class="button">Edit</a>
+          <form class="delete button" action="/transaction/<%= transaction[0].id() %>/delete" method="post">
               <input type="submit" value="Delete Transaction">
           </form>
         </tfoot>

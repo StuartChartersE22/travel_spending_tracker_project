@@ -7,6 +7,12 @@ require_relative("../models/transaction.rb")
 #INDEX
 get "/trip/:id" do
   @trip = Trip.find(params["id"].to_i())
+  @transactions = @trip.find_transactions()
+  @remaining_budget = @trip.remaining_budget()
+  @expenditure_total = @trip.expenditure_total
+  if @transactions
+    @transactions = @transactions.map {|transaction| [transaction, transaction.find_people()] }
+  end
   erb(:"transaction/index")
 end
 
@@ -18,7 +24,7 @@ end
 
 #CREATE
 post "/trip/:trip_id/create" do
-  params["amount"] += ".00" if params["amount"].count(".") == 0
+  params["amount"] += ".00" unless params["amount"].include?(".")
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.save()
@@ -28,6 +34,7 @@ end
 #SHOW
 get "/transaction/:id" do
   @transaction = Transaction.find(params["id"].to_i())
+  @people = @transaction.find_people()
   erb(:"transaction/show")
 end
 

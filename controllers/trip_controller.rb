@@ -18,7 +18,7 @@ end
 
 #CREATE
 post "/trips/create" do
-  params["budget"] += ".00" if params["budget"].count(".") == 0
+  params["budget"] += ".00" unless params["budget"].include?(".")
   @trip = Trip.new(params)
   if Trip.all().length() != 0
     @trip.save()
@@ -39,6 +39,7 @@ end
 
 #UPDATE
 post "/trips/:id" do
+  params["budget"] += ".00" unless params["budget"].include?(".")
   @trip = Trip.new(params)
   @trip.update()
   redirect to ("/trips")
