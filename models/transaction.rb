@@ -12,7 +12,7 @@ class Transaction
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
-    @name = details["name"]
+    @name = details["name"] == "" ? details["timelog"] : details["name"]
     @trip_id = details["trip_id"].to_i()
     @amount = Money.convert_to_integer(details["amount"])
     @date = details["timelog"]
