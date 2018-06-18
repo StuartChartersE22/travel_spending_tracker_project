@@ -22,6 +22,10 @@ post "/people/create" do
 end
 
 #SHOW
+get "/person/:id" do
+  @person = Person.find(params["id"])
+  erb(:"person/show")
+end
 
 #EDIT
 

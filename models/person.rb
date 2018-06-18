@@ -40,6 +40,16 @@ class Person
       SqlRunner.run(sql, values)
     end
 
+    def find_transactions()
+      sql = "SELECT transactions.* FROM people
+      INNER JOIN people_trans ON people_trans.person_id = people.id
+      INNER JOIN transactions ON people_trans.transaction_id = transactions.id
+      WHERE people_trans.person_id = $1"
+      values = [@id]
+      trans_details = SqlRunner.run(sql,values)
+      return Transaction.map_transactions(trans_details)
+    end
+
   #SQL class methods
     def self.delete_all()
       sql = "DELETE FROM people"
