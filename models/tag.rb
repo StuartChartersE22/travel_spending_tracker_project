@@ -40,6 +40,16 @@ class Tag
       SqlRunner.run(sql, values)
     end
 
+    def find_transactions()
+      sql = "SELECT transactions.* FROM tags
+      INNER JOIN trans_tags ON trans_tags.tag_id = tags.id
+      INNER JOIN transactions ON trans_tags.transaction_id = transactions.id
+      WHERE tag_id = $1"
+      values = [@id]
+      trans_details = SqlRunner.run(sql,values)
+      return Transaction.map_transactions(trans_details)
+    end
+
   #SQL class methods
     def self.delete_all()
       sql = "DELETE FROM tags"

@@ -24,13 +24,13 @@
     <% end %>
     <tr>
       <th>Whilst on:</th>
-      <td><%= Trip.find(@transaction.trip_id()).name() %></td>
+      <td><%= @transaction.find_trip().name() %></td>
     </tr>
     <tr>
       <th>Tags:</th>
       <td><ul>
         <% for tag in @transaction.find_tags() %>
-          <li><%= tag.name() %> <form class="delete" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
+          <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
             <input type="submit" value="Remove">
           </form> </li>
         <% end %>

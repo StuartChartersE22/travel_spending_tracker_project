@@ -2,6 +2,7 @@ require_relative("../db/sql_runner_money_tracker.rb")
 require_relative("./money.rb")
 require_relative("./date_time.rb")
 require_relative("./tag.rb")
+require_relative("./trip.rb")
 require("pry")
 
 class Transaction
@@ -58,6 +59,7 @@ class Transaction
       values = [@name, @trip_id, @amount, @date, @business, @company, @id]
       SqlRunner.run(sql, values)
     end
+
     def find_tags()
       sql = "SELECT tags.* FROM tags
       INNER JOIN trans_tags ON trans_tags.tag_id = tags.id
@@ -66,6 +68,13 @@ class Transaction
       values = [@id]
       tag_details = SqlRunner.run(sql,values)
       return Tag.map_tags(tag_details)
+    end
+
+    def find_trip()
+      sql = "SELECT trips.* FROM trips WHERE trips.id = $1"
+      values = [@trip_id]
+      details = SqlRunner.run(sql, values)[0]
+      return Trip.new(details)
     end
 
   #SQL class methods

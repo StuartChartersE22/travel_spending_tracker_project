@@ -5,6 +5,14 @@
     <input type="submit" value="Delete Tag">
 </form>
 
+<h3>Used to tag:</h3>
 <ul>
-  <li><p>List of transactions used in here</p></li>
+  <% for transaction in @tag.find_transactions() %>
+    <li> <a href="/transaction/<%= transaction.id() %>"><% if transaction.name().length > 0 %>
+      <h3><%= transaction.name() %></h3>
+      <% else %>
+      <h3><%= transaction.date() %></h3>
+      <% end %>
+    </a> <a href="/trip/<%= transaction.trip_id() %>"><%= transaction.find_trip().name() %></a> </li>
+  <% end %>
 </ul>

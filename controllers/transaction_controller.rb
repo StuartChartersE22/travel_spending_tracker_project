@@ -23,9 +23,6 @@ post "/trip/:trip_id/create" do
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.save()
-  for dets in trans_tag_details
-    TransTag.new(dets)
-  end
   redirect to("/trip/#{@transaction.trip_id()}")
 end
 
