@@ -1,0 +1,17 @@
+<form class="create-owing" action="/person_trans/create/<%= @person.id() %>/person/trip" method="post">
+  <select class="owing-options" name="trip_id">
+    <% for trip in Trip.all() %>
+      <option value="<%= trip.id() %>">
+        <%= trip.name() %>
+      </option>
+    <% end %>
+  </select>
+
+  <label for="owe">How much do they owe you?</label>
+  <input type="number" name="owe" min="0" step="0.01" id="owe" placeholder="0.00" min="0.01" required>
+
+  <label for="date">Date you lent (optional):</label>
+  <input type="date" name="timelog" id="date">
+
+  <input type="submit" value="Add owing">
+</form>

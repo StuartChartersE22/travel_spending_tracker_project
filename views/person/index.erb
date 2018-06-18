@@ -4,6 +4,8 @@
   <% for person in Person.all() %>
     <li><a href="/person/<%= person.id() %>"><%= person.name() %></a>
       <a href="/person/<%= person.id() %>/edit">Edit</a>
+      <a href="/person_trans/<%= person.id() %>/person">Add owing for a transaction</a>
+      <a href="/person_trans/<%= person.id() %>/person/trip">Add owing for a trip</a>
       <form class="delete button" action="/person/<%= person.id() %>/delete" method="post">
           <input type="submit" value="Delete person record">
       </form>
