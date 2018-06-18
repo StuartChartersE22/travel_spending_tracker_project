@@ -7,11 +7,15 @@ require_relative("../models/person.rb")
 #INDEX
 get "/people" do
   erb(:"person/index")
-end 
+end
+
+#NEW
+get "/people/new" do
+  erb(:"person/new")
+end
 
 #CREATE
 
-#NEW
 
 #SHOW
 
