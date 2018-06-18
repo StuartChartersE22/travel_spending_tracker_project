@@ -1,6 +1,6 @@
 <form class="tag-selection" action="/trans_tag/create/<%= @transaction.id() %>" method="post">
   <select class="tag-options" name="tag_id">
-    <% for tag in Tag.all() %>
+    <% for tag in @tags %>
       <option value="<%= tag.id() %>"><%= tag.name() %></option>
     <% end %>
   </select>

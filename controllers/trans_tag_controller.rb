@@ -13,6 +13,7 @@ end
 
 #NEW
 get "/trans-tag/:id" do
+  @tags = Tag.all()
   @transaction = Transaction.find(params["id"])
   erb(:"trans_tag/new")
 end
