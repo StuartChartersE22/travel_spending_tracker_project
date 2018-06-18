@@ -6,6 +6,7 @@ require_relative("../models/person_trans.rb")
 
 #NEW FROM PERSON FOR Transaction
 get "/person_trans/:id/person" do
+  @transactions = Transactions.all()
   @person = Person.find(params["id"])
   erb(:"person_trans/new_from_person_for_trans")
 end
