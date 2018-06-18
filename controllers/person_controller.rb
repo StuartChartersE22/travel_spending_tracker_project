@@ -25,6 +25,7 @@ end
 #SHOW
 get "/person/:id" do
   @person = Person.find(params["id"])
+  @transactions = @person.find_transactions()
   erb(:"person/show")
 end
 

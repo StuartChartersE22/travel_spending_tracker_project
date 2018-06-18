@@ -4,7 +4,7 @@
     <th><h3><% if @transaction.name() == @transaction.date() %>
         <%= @transaction.name() %></h3></th>
       <% elsif @transaction.name() == "Lent" %>
-        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a> 
+        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a>
       <% else %>
         <%= @transaction.name() %></h3></th>
         <td><p><%= @transaction.date() %></p></td>
@@ -37,7 +37,7 @@
     <tr>
       <th>Tags:</th>
       <td><ul>
-        <% for tag in @transaction.find_tags() %>
+        <% for tag in @tags %>
           <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
             <input type="submit" value="Remove">
           </form> </li>
@@ -50,8 +50,7 @@
       <th>People who have borrowed on this trip</th>
       <td> <ul>
         <% for person in @people %>
-          <li> <%= person.name() %> </li>
-          <li><%= Money.convert_to_decimal_string(person.find_owing_for_transaction(@transaction.id())) %></li>
+          <li> <a href="/person/<%= person.id() %>"><%= person.name() %></a> <%= Money.convert_to_decimal_string(person.find_owing_for_transaction(@transaction.id())) %> </li>
         <% end %>
       </ul> </td>
     </tr>
@@ -59,7 +58,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></td>
+      <td><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to trip</a></td>
       <td>
         <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
         <input type="submit" value="Delete Transaction">

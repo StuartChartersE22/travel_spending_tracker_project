@@ -6,16 +6,20 @@
 <form class="delete button" action="/person/<%= @person.id() %>/delete" method="post">
     <input type="submit" value="Remove record">
 </form>
-
+<% if @transactions.length() > 0 %>
 <h3>They owe you for:</h3>
 <ul>
-  <% for transaction in @person.find_transactions() %>
-    <li> <a href="/transaction/<%= transaction.id() %>">
-      <% if transaction.name().match?("Lent") %>
-        <h4>Borrowed on <%= transaction.find_trip().name() %></h4>
+  <% for transaction in @transactions %>
+    <li> <a href="/transaction/<%= transaction[0].id() %>">
+      <% if transaction[0].name().match?("Lent") %>
+        <h4>Borrowed on <%= transaction[0].find_trip().name() %></h4>
       <% else %>
-        <h4><%= transaction.name() %></h4>
+        <h4><%= transaction[0].name() %></h4>
       <% end %>
-    </a> whilst on: <a href="/trip/<%= transaction.trip_id() %>"><%= transaction.find_trip().name() %></a> </li>
+    </a> whilst on: <a href="/trip/<%= transaction[0].trip_id() %>"><%= transaction[0].find_trip().name() %></a>
+    <form class="delete button" action="/person_trans/<%= transaction[1] %>" method="post">
+      <input type="submit" value="Delete">
+    </form> </li>
+  <% end %>
   <% end %>
 </ul>

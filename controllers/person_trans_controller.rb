@@ -51,3 +51,9 @@ end
 #UPDATE
 
 #DELETE
+post "/person_trans/:id" do
+  @person_trans = PersonTrans.find(params["id"])
+  person_id = @person_trans.person_id()
+  @person_trans.delete()
+  redirect to("/person/#{person_id}")
+end

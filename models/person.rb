@@ -41,19 +41,23 @@ class Person
     end
 
     def find_transactions()
-      sql = "SELECT transactions.* FROM people
+      sql = "SELECT transactions.*, people_trans.id FROM people
       INNER JOIN people_trans ON people_trans.person_id = people.id
       INNER JOIN transactions ON people_trans.transaction_id = transactions.id
       WHERE people_trans.person_id = $1"
       values = [@id]
       trans_details = SqlRunner.run(sql,values)
-      return Transaction.map_transactions(trans_details)
+      if trans_details.values().length() > 0
+        people_trans = trans_details.values()[0].last().to_i()
+      end
+      transactions = Transaction.map_transactions(trans_details)
+      return transactions.map {|transaction| [transaction, people_trans]}
     end
 
     def find_owing_for_transaction(trans_id)
       sql = "SELECT SUM(owe) FROM people_trans WHERE people_trans.person_id = $1"
       values = [@id]
-      return SqlRunner.run(sql, values).values()[0][0].to.i()
+      return SqlRunner.run(sql, values).values()[0][0].to_i()
     end
 
   #SQL class methods
