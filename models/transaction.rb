@@ -7,8 +7,8 @@ require("pry")
 
 class Transaction
 
-  attr_reader(:id, :trip_id, :amount, :date, :business)
-  attr_accessor(:name, :company)
+  attr_reader(:id, :trip_id, :date, :business)
+  attr_accessor(:name, :company, :amount)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]

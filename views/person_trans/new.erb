@@ -1,0 +1,19 @@
+<form class="create-owing" action="/person_trans/create/<%= @person.id() %>/person" method="post">
+  <select class="owing-options" name="transaction_id">
+    <% for transaction in Transaction.all() %>
+      <option value="<%= transaction.id() %>">
+        <% if transaction.name().length > 0 %>
+        <p><%= transaction.name() %></p>
+        <% else %>
+        <p><%= transaction.date() %></p>
+        <% end %>
+        on <%= transaction.find_trip().name() %>
+      </option>
+    <% end %>
+  </select>
+
+  <label for="owe">How much do they owe you?</label>
+  <input type="number" name="owe" min="0" step="0.01" id="owe" placeholder="0.00" min="0.01" required>
+
+  <input type="submit" value="Add owing">
+</form>
