@@ -3,4 +3,5 @@
   <input type="text" name="name" placeholder="What would you like the tag to be instead?" value="<%= @tag.name() %>" required>
 
   <input type="submit" value="That's better!" class="button">
+  <a href="/tag/<%= @tag.id() %>">I liked the original</a>
 </form>

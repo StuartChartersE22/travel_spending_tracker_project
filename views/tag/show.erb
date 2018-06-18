@@ -13,6 +13,6 @@
       <% else %>
       <h3><%= transaction.date() %></h3>
       <% end %>
-    </a> <a href="/trip/<%= transaction.trip_id() %>"><%= transaction.find_trip().name() %></a> </li>
+    </a> whilst on: <a href="/trip/<%= transaction.trip_id() %>"><%= transaction.find_trip().name() %></a> </li>
   <% end %>
 </ul>
