@@ -13,13 +13,17 @@
     <li> <a href="/transaction/<%= relationship[1].id() %>">
       <% if relationship[1].name().match?("Lent") %>
         <h4>Borrowed on <%= relationship[1].find_trip().name() %></h4>
+        <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete/trip" method="post">
+          <input type="submit" value="Delete">
+        </form>
       <% else %>
         <h4><%= relationship[1].name() %></h4>
+        <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete" method="post">
+          <input type="submit" value="Delete">
+        </form>
       <% end %>
     </a> whilst on: <a href="/trip/<%= relationship[1].trip_id() %>"><%= relationship[1].find_trip().name() %></a>
-    <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete" method="post">
-      <input type="submit" value="Delete">
-    </form> </li>
+    </li>
   <% end %>
   <% end %>
 </ul>

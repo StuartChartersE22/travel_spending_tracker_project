@@ -57,3 +57,13 @@ post "/person_trans/:id/delete" do
   @person_trans.delete()
   redirect to("/person/#{person_id}")
 end
+
+#DELETE
+post "/person_trans/:id/delete/trip" do
+  @person_trans = PersonTrans.find(params["id"])
+  person_id = @person_trans.person_id()
+  @transaction = Transaction.find(@person_trans.transaction_id().to_i())
+  @person_trans.delete()
+  @transaction.delete()
+  redirect to("/person/#{person_id}")
+end
