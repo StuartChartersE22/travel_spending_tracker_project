@@ -1,5 +1,5 @@
 <form class="details-form" action="/trips/<%= @trip.id()%>" method="post">
-  <input type="text" name="name" value="<%= @trip.name() %>">
+  <input type="text" name="name" value="<%= @trip.name() %>" required>
 
   <label for="date">Date of the trip:</label>
   <input type="date" name="date" id="date" value=<%= @trip.date() %>>
