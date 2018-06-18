@@ -1,7 +1,7 @@
 <h2>People</h2>
 <a href="/people/new" class="button">Make new person record</a>
 <ul>
-  <% for person in Person.all() %>
+  <% for person in @people %>
     <li><a href="/person/<%= person.id() %>"><%= person.name() %></a>
       <a href="/person/<%= person.id() %>/edit">Edit</a>
       <a href="/person_trans/<%= person.id() %>/person">Add owing for a transaction</a>

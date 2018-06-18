@@ -6,6 +6,7 @@ require_relative("../models/person.rb")
 
 #INDEX
 get "/people" do
+  @people = Person.all()
   erb(:"person/index")
 end
 
