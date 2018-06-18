@@ -34,6 +34,7 @@ end
 
 #EDIT
 get "/transaction/:id/edit" do
+  @trips = Trip.all()
   @transaction = Transaction.find(params["id"].to_i())
   erb(:"transaction/edit")
 end

@@ -12,7 +12,7 @@
   <label>
     Trip you were on:
     <select name="trip_id">
-      <% for trip in Trip.all() %>
+      <% for trip in @trips %>
       <option value="<%= trip.id %>" <%= "selected" if @transaction.trip_id() == trip.id() %> ><%= trip.name %></option>
       <% end %>
     </select>
