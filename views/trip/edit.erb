@@ -2,7 +2,7 @@
   <input type="text" name="name" value="<%= @trip.name() %>" required>
 
   <label for="date">Date of the trip:</label>
-  <input type="date" name="date" id="date" value=<%= @trip.date() %>>
+  <input type="date" name="timelog" id="date" value=<%= @trip.date() %>>
 
   <label for="current">Is this your current trip?</label>
   <input type="checkbox" name="current" id="current" value="true" <%= "checked" if @trip.current() %> >

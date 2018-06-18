@@ -1,30 +1,29 @@
 <h2>Trips</h2>
 <a href="/trips/new" class="button">New trip</a>
 
-<% if Trip.find_current() %>
-<% current = Trip.find_current() %>
+<% if @current %>
 <ul class="trip-list" id="trip-list-current">
   <li>
 
     <table>
     <thead>
-      <a href="/trip/<%= current.id()%>" class="trip-name"><h3><%= current.name() %></h3></a>
+      <a href="/trip/<%= @current.id()%>" class="trip-name"><h3><%= @current.name() %></h3></a>
     </thead>
     <tr>
-    <% if current.budget() > 0 %>
+    <% if @current.budget() > 0 %>
       <th>Spending money left:</th>
-      <td class="amount"><%= Money.convert_to_decimal_string(current.remaining_budget) %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(@current.remaining_budget) %></td>
     <% else %>
       <th>Amount spent:</th>
-      <td class="amount"><%= Money.convert_to_decimal_string(current.expenditure_total) %></td>
+      <td class="amount"><%= Money.convert_to_decimal_string(@current.expenditure_total) %></td>
     <% end %>
     </tr>
     </table>
 
-    <a href="/trip/<%= current.id() %>/new" class="button">New transaction</a>
-    <a href="/trip/<%= current.id()%>" class= "button">See transactions</a>
-    <a href="/trips/<%= current.id()%>/edit">Edit</a>
-    <form class="delete" action="/trips/<%= current.id() %>/delete" method="post">
+    <a href="/trip/<%= @current.id() %>/new" class="button">New transaction</a>
+    <a href="/trip/<%= @current.id()%>" class= "button">See transactions</a>
+    <a href="/trips/<%= @current.id()%>/edit">Edit</a>
+    <form class="delete" action="/trips/<%= @current.id() %>/delete" method="post">
         <input type="submit" value="Delete Trip" class="button">
     </form>
 
@@ -34,7 +33,7 @@
 
 
 <ul class="trip-list">
-  <% for trip in Trip.all_but_current() %>
+  <% for trip in @other_trips %>
   <li><table>
     <thead>
       <a href="/trip/<%= trip.id()%>" class="trip-name"><h3><%= trip.name() %></h3></a>

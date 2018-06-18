@@ -1,6 +1,7 @@
 <form class="create-owing" action="/person_trans/create/<%= @person.id() %>/person/trip" method="post">
+
   <select class="owing-options" name="trip_id">
-    <% for trip in Trip.all() %>
+    <% for trip in @trips %>
       <option value="<%= trip.id() %>">
         <%= trip.name() %>
       </option>

@@ -23,6 +23,7 @@ end
 #NEW FROM PERSON FOR TRIP
 get "/person_trans/:id/person/trip" do
   @person = Person.find(params["id"].to_i())
+  @trips = Trip.all()
   erb(:"person_trans/new_from_person_for_trip")
 end
 

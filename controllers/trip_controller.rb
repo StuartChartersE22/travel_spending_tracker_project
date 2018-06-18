@@ -6,6 +6,8 @@ require_relative("../models/money.rb")
 
 #INDEX
 get "/trips" do
+  @current = Trip.find_current()
+  @other_trips = Trip.all_but_current()
   erb(:"/trip/index")
 end
 
