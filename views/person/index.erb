@@ -1,0 +1,12 @@
+<h2>People</h2>
+<a href="/people/new" class="button">Make new person record</a>
+<ul>
+  <% for person in Person.all() %>
+    <li><a href="/person/<%= person.id() %>"><%= person.name() %></a>
+      <a href="/person/<%= person.id() %>/edit">Edit</a>
+      <form class="delete button" action="/person/<%= person.id() %>/delete" method="post">
+          <input type="submit" value="Delete person record">
+      </form>
+    </li>
+  <% end %>
+</ul>

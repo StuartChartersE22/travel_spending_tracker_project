@@ -9,6 +9,7 @@
         Non-business
       <% end %>
     </p></td>
+    <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
   </thead>
 
   <tbody>
@@ -40,7 +41,6 @@
   </tbody>
   <tfoot>
     <tr>
-      <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
       <td><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to transaction</a></td>
       <td>
         <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
