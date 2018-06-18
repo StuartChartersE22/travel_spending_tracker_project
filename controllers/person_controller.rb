@@ -15,7 +15,11 @@ get "/people/new" do
 end
 
 #CREATE
-
+post "/people/create" do
+  @person = Person.new(params)
+  @person.save()
+  redirect to("/people")
+end
 
 #SHOW
 
