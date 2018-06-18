@@ -7,7 +7,7 @@ require("pry")
 
 class Transaction
 
-  attr_reader(:id, :trip_id, :date, :business)
+  attr_reader(:id, :trip_id, :date, :business, :person_id)
   attr_accessor(:name, :company, :amount)
 
   def initialize(details)
@@ -18,6 +18,7 @@ class Transaction
     @date = details["timelog"]
     @business = details["business"]=="true" || details["business"]=="t" ? true : false
     @company = details["company"] if details["company"]
+    @person_id = details["person_id"].to_i() if details["person_id"]
   end
 
   #Pure Ruby instance methods
@@ -37,11 +38,11 @@ class Transaction
   #SQL instance methods
     def save()
       sql = "INSERT INTO transactions
-      (name, trip_id, amount, timelog, business, company)
+      (name, trip_id, amount, timelog, business, company, person_id)
       VALUES
-      ($1, $2, $3, $4, $5, $6)
+      ($1, $2, $3, $4, $5, $6, $7)
       RETURNING id"
-      values = [@name, @trip_id, @amount, @date, @business, @company]
+      values = [@name, @trip_id, @amount, @date, @business, @company, @person_id]
       @id = SqlRunner.run(sql, values)[0]["id"].to_i()
     end
 
@@ -54,9 +55,9 @@ class Transaction
 
     def update()
       sql = "UPDATE transactions
-      SET (name, trip_id, amount, timelog, business, company) = ($1, $2, $3, $4, $5, $6)
-      WHERE id = $7"
-      values = [@name, @trip_id, @amount, @date, @business, @company, @id]
+      SET (name, trip_id, amount, timelog, business, company, person_id) = ($1, $2, $3, $4, $5, $6, $7)
+      WHERE id = $8"
+      values = [@name, @trip_id, @amount, @date, @business, @company, @person_id, @id]
       SqlRunner.run(sql, values)
     end
 

@@ -32,7 +32,8 @@ CREATE TABLE transactions(
   amount INT NOT NULL,
   timelog DATE NOT NULL,
   business BOOLEAN,
-  company VARCHAR(255)
+  company VARCHAR(255),
+  person_id INT4 REFERENCES people(id) ON DELETE CASCADE
 );
 
 CREATE TABLE items(
