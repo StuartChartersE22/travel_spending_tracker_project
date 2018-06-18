@@ -1,7 +1,7 @@
 <h2>Tags</h2>
 <a href="/tags/new" class="button">Make new tag</a>
 <ul>
-  <% for tag in Tag.all() %>
+  <% for tag in @tags %>
     <li><a href="/tag/<%= tag.id() %>"><%= tag.name() %></a>
       <a href="/tag/<%= tag.id() %>/edit">Edit</a>
       <form class="delete button" action="/tag/<%= tag.id() %>/delete" method="post">

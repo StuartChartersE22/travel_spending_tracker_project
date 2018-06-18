@@ -6,6 +6,7 @@ require_relative("../models/tag.rb")
 
 #INDEX
 get "/tags" do
+  @tags = Tag.all()
   erb(:"tag/index")
 end
 
