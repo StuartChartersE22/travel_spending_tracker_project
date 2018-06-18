@@ -43,7 +43,7 @@ CREATE TABLE items(
 );
 
 CREATE TABLE people_trans(
-  id SERIAL4 PRIMARY KEY,
+  identity SERIAL4 PRIMARY KEY,
   transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
   person_id INT4 REFERENCES people(id) ON DELETE CASCADE,
   owe INT,

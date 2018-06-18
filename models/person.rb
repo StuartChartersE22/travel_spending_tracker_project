@@ -40,18 +40,19 @@ class Person
       SqlRunner.run(sql, values)
     end
 
-    def find_transactions()
-      sql = "SELECT transactions.*, people_trans.id FROM people
+    def find_relationships_and_transactions()
+      sql = "SELECT transactions.*, people_trans.identity FROM people
       INNER JOIN people_trans ON people_trans.person_id = people.id
       INNER JOIN transactions ON people_trans.transaction_id = transactions.id
       WHERE people_trans.person_id = $1"
       values = [@id]
-      trans_details = SqlRunner.run(sql,values)
-      if trans_details.values().length() > 0
-        people_trans = trans_details.values()[0].last().to_i()
+      details = SqlRunner.run(sql,values).to_a()
+      transactions_and_relationship = details.map do |detail| [
+        PersonTrans.find(detail["identity"]),
+        Transaction.new(detail)
+      ]
       end
-      transactions = Transaction.map_transactions(trans_details)
-      return transactions.map {|transaction| [transaction, people_trans]}
+      return transactions_and_relationship
     end
 
     def find_owing_for_transaction(trans_id)

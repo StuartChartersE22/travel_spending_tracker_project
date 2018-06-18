@@ -7,7 +7,7 @@ class PersonTrans
   attr_reader(:id, :transaction_id, :person_id, :owe, :date)
 
   def initialize(details)
-    @id = details["id"].to_i() if details["id"]
+    @id = details["identity"].to_i() if details["identity"]
     @transaction_id = details["transaction_id"].to_i()
     @person_id = details["person_id"].to_i()
     @owe = Money.convert_to_integer(details["owe"])
@@ -32,14 +32,14 @@ class PersonTrans
     def save()
       sql = "INSERT INTO people_trans
       (transaction_id, person_id, owe, timelog) VALUES ($1, $2, $3, $4)
-      RETURNING id"
+      RETURNING identity"
       values = [@transaction_id, @person_id, @owe, @date]
-      @id = SqlRunner.run(sql, values)[0]["id"].to_i()
+      @id = SqlRunner.run(sql, values)[0]["identity"].to_i()
     end
 
     def delete()
       sql = "DELETE FROM people_trans
-      WHERE id = $1"
+      WHERE identity = $1"
       values = [@id]
       SqlRunner.run(sql, values)
     end
@@ -47,7 +47,7 @@ class PersonTrans
     def update()
       sql = "UPDATE people_trans
       SET (transaction_id, person_id, owe, timelog) = ($1, $2, $3, $4)
-      WHERE id = $5"
+      WHERE identity = $5"
       values = [@transaction_id, @person_id, @owe, @date, @id]
       SqlRunner.run(sql, values)
     end
@@ -65,7 +65,7 @@ class PersonTrans
     end
 
     def self.find(id)
-      sql = "SELECT * FROM people_trans WHERE id = $1"
+      sql = "SELECT * FROM people_trans WHERE identity = $1"
       values = [id]
       details = SqlRunner.run(sql, values)[0]
       return self.new(details)

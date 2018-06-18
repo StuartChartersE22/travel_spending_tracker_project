@@ -51,7 +51,7 @@ end
 #UPDATE
 
 #DELETE
-post "/person_trans/:id" do
+post "/person_trans/:id/delete" do
   @person_trans = PersonTrans.find(params["id"])
   person_id = @person_trans.person_id()
   @person_trans.delete()
