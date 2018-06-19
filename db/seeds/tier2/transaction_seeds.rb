@@ -15,8 +15,18 @@ class TransactionSeeds
       "company" => "Subway"
     })
 
+    transaction2 = Transaction.new({
+      "name" => "Business lunch",
+      "trip_id" => trips[1].id(),
+      "amount" => "3600",
+      "timelog" => "2018-10-18 12:30:02",
+      "business" => "true",
+      "company" => "The Kitchin"
+    })
+
     transaction1.save()
-    return [transaction1]
+    transaction2.save()
+    return [transaction1, transaction2]
   end
 
 end

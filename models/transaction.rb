@@ -94,6 +94,16 @@ class Transaction
       return Item.map_items(details)
     end
 
+    def amount_left_to_allocate()
+      values = [@id]
+      sql = "SELECT SUM(people_trans.owe) FROM people_trans WHERE people_trans.transaction_id = $1"
+      people_total = SqlRunner.run(sql, values).values[0][0].to_i()
+      sql = "SELECT SUM(items.amount) FROM items WHERE items.transaction_id = $1"
+      items_total = SqlRunner.run(sql, values).values[0][0].to_i()
+      total = people_total + items_total
+      return @amount - total
+    end
+
   #SQL class methods
     def self.delete_all()
       sql = "DELETE FROM transactions"

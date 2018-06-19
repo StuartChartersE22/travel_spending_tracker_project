@@ -14,12 +14,22 @@ end
 
 #CREATE FROM PERSON FOR TRANSACTION
 post "/person_trans/create/:person_id/person" do
-  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
+  params["owe"] = Money.convert_to_integer(params["owe"])
   @transaction = Transaction.find(params["transaction_id"].to_i())
+  @max_amount = @transaction.amount_left_to_allocate()
+  redirect to("/insufficient_allocation/#{@transaction.id()}/#{params['person_id']}") if params["owe"] > @max_amount
   params["timelog"] = @transaction.date()
   @person_trans = PersonTrans.new(params)
   @person_trans.save()
   redirect to("/person/#{params["person_id"]}")
+end
+
+#INSUFFICIENT ALLOCATION SPACE IN TRANSACTION - NEW
+get "/insufficient_allocation/:transaction_id/:person_id" do
+  @person = Person.find(params["person_id"])
+  @transaction = Transaction.find(params["transaction_id"].to_i())
+  @max_amount = @transaction.amount_left_to_allocate()
+  erb(:"person_trans/insufficient_allocation_from_new")
 end
 
 #NEW FROM PERSON FOR TRIP
@@ -53,12 +63,22 @@ end
 
 #UPDATE FROM PERSON FOR TRANSACTION
 post "/person_trans/:person_trans_id/:person_id/update" do
-  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
+  params["owe"] = Money.convert_to_integer(params["owe"])
   @transaction = Transaction.find(params["transaction_id"].to_i())
+  @max_amount = @transaction.amount_left_to_allocate() + params["owe"]
+  redirect to("/insufficient_allocation/edit/#{@transaction.id()}/#{params['person_trans_id']}") if params["owe"] > @max_amount
   params["timelog"] = @transaction.date()
   @person_trans = PersonTrans.new(params)
   @person_trans.update()
   redirect to("/person/#{params["person_id"]}")
+end
+
+#INSUFFICIENT ALLOCATION SPACE IN TRANSACTION - EDIT
+get "/insufficient_allocation/edit/:transaction_id/:person_trans_id" do
+  @person_trans = PersonTrans.find(params["person_trans_id"])
+  @transaction = Transaction.find(params["transaction_id"])
+  @max_amount = @transaction.amount_left_to_allocate() + @person_trans.owe()
+  erb(:"person_trans/insufficient_allocation_from_edit")
 end
 
 #EDIT FROM PERSON FOR TRIP

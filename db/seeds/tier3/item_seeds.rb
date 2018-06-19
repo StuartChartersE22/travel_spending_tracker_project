@@ -7,7 +7,7 @@ class ItemSeeds
     item1 = Item.new({
       "name" => "beer",
       "amount" => "500",
-      "transaction_id" => transactions[0].id()
+      "transaction_id" => transactions[1].id()
       })
 
     item1.save()
