@@ -1,0 +1,19 @@
+<form class="create-owing" action="/person_trans/<%= @person_trans.id() %>/<%= @person_trans.person_id() %>/update/trip" method="post">
+
+  <select class="owing-options" name="trip_id">
+    <% for trip in @trips %>
+      <option value="<%= trip.id() %>" <%= "selected" if trip.id() == @transaction.trip_id() %>>
+        <%= trip.name() %>
+      </option>
+    <% end %>
+  </select>
+
+  <label for="owe">How much do they owe you?</label>
+  <input type="number" name="owe" min="0" step="0.01" id="owe" placeholder="0.00" min="0.01" value="<%= Money.convert_to_decimal_string(@person_trans.owe()) %>" required>
+
+  <label for="date">Date you lent (optional):</label>
+  <input type="date" name="timelog" id="date" value="@person_trans.date()">
+
+  <input type="submit" value="That's better!">
+  <a href="/person/<%= @person_trans.person_id() %>">I liked the original</a>
+</form>

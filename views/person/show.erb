@@ -16,11 +16,13 @@
         <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete/trip" method="post">
           <input type="submit" value="Delete">
         </form>
+        <a href="/person_trans/<%= relationship[0].id() %>/edit/trip">Update</a>
       <% else %>
         <h4><%= relationship[1].name() %></h4>
         <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete" method="post">
           <input type="submit" value="Delete">
         </form>
+        <a href="/person_trans/<%= relationship[0].id() %>/edit">Update</a>
       <% end %>
       </a>
       <li>Amount borrowed: <%= Money.convert_to_decimal_string(relationship[0].owe()) %></li>
