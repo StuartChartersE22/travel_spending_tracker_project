@@ -48,7 +48,7 @@
     <th>Items:</th>
     <td><ul>
       <% for item in @items %>
-        <li> <%= item.name() %>
+        <li> <%= item.name() %> for <%= Money.convert_to_decimal_string(item.amount()) %>
           <form class="delete" action="/item/<%= item.id() %>/delete" method="post">
           <input type="submit" value="Remove">
         </form> </li>
