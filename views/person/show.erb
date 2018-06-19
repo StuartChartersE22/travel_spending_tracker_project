@@ -22,7 +22,9 @@
           <input type="submit" value="Delete">
         </form>
       <% end %>
-    </a> whilst on: <a href="/trip/<%= relationship[1].trip_id() %>"><%= relationship[1].find_trip().name() %></a>
+      </a>
+      <li>Amount borrowed: <%= Money.convert_to_decimal_string(relationship[0].owe()) %></li>
+      whilst on: <a href="/trip/<%= relationship[1].trip_id() %>"><%= relationship[1].find_trip().name() %></a>
     </li>
   <% end %>
   <% end %>
