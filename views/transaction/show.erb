@@ -53,7 +53,7 @@
           <input type="submit" value="Remove">
         </form> </li>
       <% end %>
-      <li><a href="/item/new">Add item</a></li>
+      <li><a href="/item/<%= @transaction.id() %>/new">Add item</a></li>
     </ul></td>
   </tr>
     <% unless @transaction.name() == "Lent" %>
