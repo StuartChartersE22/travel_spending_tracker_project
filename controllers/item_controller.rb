@@ -33,3 +33,9 @@ post "/item/:id/:transaction_id/update" do
 end
 
 #DELETE
+post "/item/:id/delete" do
+  @item = Item.find(params["id"].to_i())
+  @transaction_id = @item.transaction_id().to_i()
+  @item.delete()
+  redirect to("/transaction/#{@transaction_id}")
+end
