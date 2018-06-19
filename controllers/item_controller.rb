@@ -12,15 +12,16 @@ end
 
 #CREATE
 post "/item/:transaction_id/create" do
-  params["amount"] += ".00" unless params["amount"].include?(".")
+  params["amount"] = Money.convert_to_integer(params["amount"]).to_s
   @item = Item.new(params)
   @item.save()
   redirect to("/transaction/#{params["transaction_id"]}")
 end
 
 #EDIT
-get "/item/:transaction_id/edit" do
-
+get "/item/:id/edit" do
+  @item = Item.find(params["id"])
+  erb(:"item/edit")
 end
 
 #UPDATE

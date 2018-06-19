@@ -7,7 +7,7 @@ class PersonTransSeeds
     person_trans1 = PersonTrans.new({
       "transaction_id" => transactions[0].id(),
       "person_id" => people[0].id(),
-      "owe" => "13.63",
+      "owe" => "1363",
       "timelog" => "2018-10-18 12:30:02"
       })
 

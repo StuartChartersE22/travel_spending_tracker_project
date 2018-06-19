@@ -10,7 +10,7 @@ class PersonTrans
     @id = details["identity"].to_i() if details["identity"]
     @transaction_id = details["transaction_id"].to_i()
     @person_id = details["person_id"].to_i()
-    @owe = Money.convert_to_integer(details["owe"])
+    @owe = details["owe"].to_i()
     @date = details["timelog"]
   end
 

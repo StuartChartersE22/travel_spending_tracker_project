@@ -6,7 +6,7 @@ class ItemSeeds
   def self.plant(transactions)
     item1 = Item.new({
       "name" => "beer",
-      "amount" => "5.00",
+      "amount" => "500",
       "transaction_id" => transactions[0].id()
       })
 

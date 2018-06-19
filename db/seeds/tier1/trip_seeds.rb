@@ -8,7 +8,7 @@ class TripSeeds
 
     trip1 = Trip.new({
       "name" => "Family holiday",
-      "budget" => "500.00",
+      "budget" => "50000",
       "current" => "true",
       "business" => nil,
       "timelog" => "2018-10-13"
@@ -16,7 +16,7 @@ class TripSeeds
 
     trip2 = Trip.new({
       "name" => "Business trip",
-      "budget" => "200.00",
+      "budget" => "20000",
       "current" => nil,
       "business" => "true",
       "timelog" => "2018-05-06"

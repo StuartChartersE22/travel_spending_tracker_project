@@ -9,7 +9,7 @@ class TransactionSeeds
     transaction1 = Transaction.new({
       "name" => "Lunch with family",
       "trip_id" => trips[0].id(),
-      "amount" => "15.75",
+      "amount" => "1575",
       "timelog" => "2018-10-18 12:30:02",
       "business" => "false",
       "company" => "Subway"

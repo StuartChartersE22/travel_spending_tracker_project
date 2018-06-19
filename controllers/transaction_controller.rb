@@ -26,7 +26,7 @@ end
 
 #CREATE
 post "/trip/:trip_id/create" do
-  params["amount"] += ".00" unless params["amount"].include?(".")
+  params["amount"] = Money.convert_to_integer(params["amount"]).to_s
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.save()
@@ -51,7 +51,7 @@ end
 
 #UPDATE
 post "/transaction/:id/update" do
-  params["amount"] += ".00" if params["amount"].count(".") == 0
+  params["amount"] = Money.convert_to_integer(params["amount"]).to_s
   params["company"] = nil if params["company"] == ""
   @transaction = Transaction.new(params)
   @transaction.update()

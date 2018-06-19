@@ -9,7 +9,7 @@ class Item
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
     @name = details["name"]
-    @amount = Money.convert_to_integer(details["amount"])
+    @amount = details["amount"].to_i
     @transaction_id = details["transaction_id"].to_i()
   end
 

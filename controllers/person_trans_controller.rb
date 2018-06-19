@@ -14,7 +14,7 @@ end
 
 #CREATE FROM PERSON FOR TRANSACTION
 post "/person_trans/create/:person_id/person" do
-  params["owe"] += ".00" if params["owe"].count(".") == 0
+  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
   @transaction = Transaction.find(params["transaction_id"].to_i())
   params["timelog"] = @transaction.date()
   @person_trans = PersonTrans.new(params)
@@ -31,7 +31,7 @@ end
 
 #CREATE FROM PERSON FOR TRIP
 post "/person_trans/create/:person_id/person/trip" do
-  params["owe"] += ".00" if params["owe"].count(".") == 0
+  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
   @trip = Trip.find(params["trip_id"].to_i())
   params["name"] = "Lent"
   params["timelog"] = @trip.date() if params["timelog"] == ""
@@ -53,7 +53,7 @@ end
 
 #UPDATE FROM PERSON FOR TRANSACTION
 post "/person_trans/:person_trans_id/:person_id/update" do
-  params["owe"] += ".00" if params["owe"].count(".") == 0
+  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
   @transaction = Transaction.find(params["transaction_id"].to_i())
   params["timelog"] = @transaction.date()
   @person_trans = PersonTrans.new(params)
@@ -72,7 +72,7 @@ end
 #UPDATE FROM PERSON FOR TRIP
 post "/person_trans/:person_trans_id/update/trip" do
   @original_p_t = PersonTrans.find(params["person_trans_id"])
-  params["owe"] += ".00" if params["owe"].count(".") == 0
+  params["owe"] = Money.convert_to_integer(params["owe"]).to_s
   @trip = Trip.find(params["trip_id"].to_i())
   params["name"] = "Lent"
   params["timelog"] = @trip.date() if params["timelog"] == ""

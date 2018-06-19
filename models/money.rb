@@ -1,7 +1,11 @@
 class Money
 
   def self.convert_to_integer(decimal_amount_as_string)
-    integer = decimal_amount_as_string.delete(".").to_i()
+    if decimal_amount_as_string.include?(".")
+      return integer = decimal_amount_as_string.delete(".").to_i
+    else
+      return decimal_amount_as_string.to_i * 100
+    end
   end
 
   def self.convert_to_decimal_string(integer)
