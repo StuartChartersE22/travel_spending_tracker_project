@@ -1,5 +1,6 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
+require("pry")
 also_reload("../models/*")
 also_reload("../controllers/*")
 require_relative("../models/transaction.rb")
@@ -10,6 +11,7 @@ get "/trip/:id" do
   @transactions = @trip.find_transactions()
   @remaining_budget = @trip.remaining_budget()
   @expenditure_total = @trip.expenditure_total
+  # binding.pry
   if @transactions
     @transactions = @transactions.map {|transaction| [transaction, transaction.find_people()] }
   end

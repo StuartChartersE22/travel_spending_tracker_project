@@ -1,5 +1,6 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
+require('pry')
 also_reload("../models/*")
 also_reload("../controllers/*")
 require_relative("../models/person_trans.rb")
@@ -69,15 +70,20 @@ get "/person_trans/:id/edit/trip" do
 end
 
 #UPDATE FROM PERSON FOR TRIP
-post "/person_trans/:person_trans_id/:person_id/update/trip" do
+post "/person_trans/:person_trans_id/update/trip" do
+  @original_p_t = PersonTrans.find(params["person_trans_id"])
   params["owe"] += ".00" if params["owe"].count(".") == 0
   @trip = Trip.find(params["trip_id"].to_i())
   params["name"] = "Lent"
   params["timelog"] = @trip.date() if params["timelog"] == ""
   params["amount"] = params["owe"]
+  params["id"] = @original_p_t.transaction_id
+  params["identity"] = params["person_trans_id"]
   @transaction = Transaction.new(params)
+  # binding.pry
   @transaction.update()
   params["transaction_id"] = @transaction.id()
+  params["person_id"] = @original_p_t.person_id
   @person_trans = PersonTrans.new(params)
   @person_trans.update()
   redirect to("/person/#{params["person_id"]}")
