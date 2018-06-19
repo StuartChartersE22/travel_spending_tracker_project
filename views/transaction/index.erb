@@ -40,12 +40,14 @@
         <thead>
           <% if transaction[0].name() == transaction[0].date() %>
             <h3><%= transaction[0].name() %></h3>
+            <a href="/transaction/<%= transaction[0].id() %>/edit" class="button">Edit</a>
           <% elsif transaction[0].name() == "Lent" %>
             <h3>Lent to <a href="/person/<%= transaction[1][0].id() %>"><%= transaction[1][0].name() %></a></h3>
             <p> <%= transaction[0].date() %> </p>
           <% else %>
             <h3><%= transaction[0].name() %></h3>
             <p> <%= transaction[0].date() %> </p>
+            <a href="/transaction/<%= transaction[0].id() %>/edit" class="button">Edit</a>
           <% end %>
         </thead>
         <tbody>
@@ -62,7 +64,6 @@
         </tbody>
         <tfoot>
           <a href="/transaction/<%= transaction[0].id %>">Details of transaction</a>
-          <a href="/transaction/<%= transaction[0].id() %>/edit" class="button">Edit</a>
           <form class="delete button" action="/transaction/<%= transaction[0].id() %>/delete" method="post">
               <input type="submit" value="Delete Transaction">
           </form>

@@ -3,6 +3,7 @@
   <thead>
     <th><h3><% if @transaction.name() == @transaction.date() %>
         <%= @transaction.name() %></h3></th>
+        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
       <% elsif @transaction.name() == "Lent" %>
         Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a>
       <% else %>
@@ -16,7 +17,6 @@
         Non-business
       <% end %>
     </p></td>
-    <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
   </thead>
 
   <tbody>
