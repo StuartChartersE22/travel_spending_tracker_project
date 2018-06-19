@@ -38,6 +38,7 @@ get "/transaction/:id" do
   @transaction = Transaction.find(params["id"].to_i())
   @people = @transaction.find_people()
   @tags = @transaction.find_tags()
+  @items = @transaction.find_items()
   erb(:"transaction/show")
 end
 

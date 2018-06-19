@@ -4,6 +4,7 @@ require_relative("./date_time.rb")
 require_relative("./tag.rb")
 require_relative("./trip.rb")
 require_relative("./person.rb")
+require_relative("./item.rb")
 require("pry")
 
 class Transaction
@@ -84,6 +85,13 @@ class Transaction
       values = [@id]
       details = SqlRunner.run(sql, values)
       return Person.map_people(details)
+    end
+
+    def find_items()
+      sql = "SELECT * FROM items WHERE items.transaction_id = $1"
+      values = [@id]
+      details = SqlRunner.run(sql, values)
+      return Item.map_items(details)
     end
 
   #SQL class methods

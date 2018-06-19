@@ -45,6 +45,17 @@
         <li><a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></li>
       </ul></td>
     </tr>
+    <th>Items:</th>
+    <td><ul>
+      <% for item in @items %>
+        <li> <%= item.name() %>
+          <form class="delete" action="/item/<%= item.id() %>/delete" method="post">
+          <input type="submit" value="Remove">
+        </form> </li>
+      <% end %>
+      <li><a href="/item/new">Add item</a></li>
+    </ul></td>
+  </tr>
     <% unless @transaction.name() == "Lent" %>
     <tr>
       <th>People who have borrowed on this trip</th>
