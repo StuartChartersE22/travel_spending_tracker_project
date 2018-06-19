@@ -51,6 +51,7 @@
         <li> <%= item.name() %> for <%= Money.convert_to_decimal_string(item.amount()) %>
           <form class="delete" action="/item/<%= item.id() %>/delete" method="post">
           <input type="submit" value="Remove">
+          <li><a href="/item/<%= item.id() %>/edit">Change details</a></li>
         </form> </li>
       <% end %>
       <li><a href="/item/<%= @transaction.id() %>/new">Add item</a></li>

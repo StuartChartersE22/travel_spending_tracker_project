@@ -3,8 +3,8 @@ require("pry")
 
 class Item
 
-  attr_reader(:id, :transaction_id, :amount)
-  attr_accessor(:name)
+  attr_reader(:id, :transaction_id)
+  attr_accessor(:name, :amount)
 
   def initialize(details)
     @id = details["id"].to_i() if details["id"]
@@ -16,10 +16,6 @@ class Item
   #Pure Ruby instance methods
   def show_decimal_amount()
     return Money.convert_to_decimal_string(@amount)
-  end
-
-  def change_amount(decimal_string)
-    @amount = Money.convert_to_integer(decimal_string)
   end
 
   #Pure Ruby class methods
@@ -46,7 +42,7 @@ class Item
     end
 
     def update()
-      sql = "UPDATE transactions
+      sql = "UPDATE items
       SET (name, amount, transaction_id) = ($1, $2, $3)
       WHERE id = $4"
       values = [@name, @amount, @transaction_id, @id]
