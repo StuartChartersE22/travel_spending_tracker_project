@@ -1,10 +1,13 @@
 <form class="details-form" action="/item/<%= @item.id() %>/<%= @item.transaction_id() %>/update" method="post">
 
-  <input type="text" name="name" placeholder="What is the item?" value="<%= @item.name() %>" required>
+  <input type="text" name="name" placeholder="Replace with name of item" value="<%= @item.name() %>" class="details-form-name-input" required>
 
-  <label for="amount">Price of item:</label>
-  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %> left to assign" min="0.01" value="<%= Money.convert_to_decimal_string(@item.amount()).delete('£ ') %>" max="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>" required>
+  <div class="details-form-row">
+    <label for="amount" class="details-form-cell">Price of item:</label>
+    <input type="number" name="amount" min="0" step="0.01" id="amount" class="details-form-cell" placeholder="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %> left to assign" min="0.01" value="<%= Money.convert_to_decimal_string(@item.amount()).delete('£ ') %>" max="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>" required>
+  </div>
 
-  <input type="submit" value="That's better">
-  <a href="/transaction/<%= @item.transaction_id() %>">I liked the original</a>
+  <input type="submit" value="That's better" class="details-form-submit-button">
+  <a href="/transaction/<%= @item.transaction_id() %>" class="details-form-submit-button">I liked the original</a>
+
 </form>

@@ -1,10 +1,12 @@
 <form class="details-form" action="/item/<%= @transaction.id() %>/create" method="post">
 
-  <input type="text" name="name" placeholder="What is the item?" required>
+  <input type="text" name="name" placeholder="Replace with name of item" class="details-form-name-input" required>
 
-  <label for="amount">Price of item:</label>
-  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="<%= Money.convert_to_decimal_string(@max_amount) %> left to assign" min="0.01" max="<%= Money.convert_to_decimal_string(@max_amount) %>" required>
+  <div class="details-form-row">
+    <label for="amount" class="details-form-cell">Price of item:</label>
+    <input type="number" name="amount" min="0" step="0.01" id="amount" class="details-form-cell" placeholder="<%= Money.convert_to_decimal_string(@max_amount) %> left to assign" min="0.01" max="<%= Money.convert_to_decimal_string(@max_amount) %>" required>
+  </div>
 
-  <input type="submit" value="Add item">
-  <a href="/transaction/<%= @transaction.id() %>">Back</a>
+  <input type="submit" value="Add item" class="details-form-submit-button">
+  <a href="/transaction/<%= @transaction.id() %>" class="details-form-submit-button">Back</a>
 </form>
