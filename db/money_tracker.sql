@@ -44,7 +44,7 @@ CREATE TABLE items(
 
 CREATE TABLE people_trans(
   identity SERIAL4 PRIMARY KEY,
-  transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
+  transaction_id INT4 REFERENCES transactions(id) ON DELETE CASCADE UNIQUE,
   person_id INT4 REFERENCES people(id) ON DELETE CASCADE,
   owe INT,
   timelog DATE

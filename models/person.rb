@@ -40,6 +40,17 @@ class Person
       SqlRunner.run(sql, values)
     end
 
+    def find_available_transactions()
+      sql = "SELECT transactions.* FROM transactions
+      LEFT JOIN people_trans ON people_trans.transaction_id = transactions.id
+      EXCEPT (SELECT transactions.* FROM transactions
+      INNER JOIN people_trans ON people_trans.transaction_id = transactions.id
+      WHERE transactions.name = 'Lent' OR people_trans.person_id = $1)"
+      values = [@id]
+      details = SqlRunner.run(sql, values)
+      return Transaction.map_transactions(details)
+    end
+
     def find_relationships_and_transactions()
       sql = "SELECT transactions.*, people_trans.identity FROM people
       INNER JOIN people_trans ON people_trans.person_id = people.id

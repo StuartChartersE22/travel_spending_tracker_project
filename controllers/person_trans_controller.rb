@@ -7,8 +7,9 @@ require_relative("../models/person_trans.rb")
 
 #NEW FROM PERSON FOR Transaction
 get "/person_trans/:id/person" do
-  @transactions = Transaction.find_not_lendings()
   @person = Person.find(params["id"])
+  @transactions = @person.find_available_transactions()
+  # binding.pry
   erb(:"person_trans/new_from_person_for_trans")
 end
 
@@ -56,8 +57,8 @@ end
 
 #EDIT FROM PERSON FOR TRANSACTION
 get "/person_trans/:id/edit" do
-  @transactions = Transaction.find_not_lendings()
   @person_trans = PersonTrans.find(params["id"])
+  @transactions = @person.find_available_transactions().push(Transaction.find(@person_trans.transaction_id()))
   erb(:"person_trans/edit_from_person_for_trans")
 end
 
