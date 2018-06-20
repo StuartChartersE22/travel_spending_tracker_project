@@ -2,10 +2,27 @@
 
 }
 
-.details_form .form-row{
+  .details-form-row{
+    display: block;
+    padding: 1rem;
+    position: relative;
+    left: 2rem;
+  }
 
+.details-form-submit-button{
+  display: inline-block;
+  height: 1.5em;
+  font-size: 1em;
+  width: auto;
+  position: relative;
+  left: 2rem;
+  padding: 1rem;
 }
 
-.details_form .form-submit-button{
-  
+.details-form-cell {
+  display: block;
+}
+
+.details-form-checkbox {
+  display: inline-block;
 }
