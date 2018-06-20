@@ -1,33 +1,34 @@
 <h2><%= @person.name() %></h2>
-<a href="/person/<%= @person.id() %>/edit">Edit name</a>
+<a href="/person/<%= @person.id() %>/edit" class="button">Edit name</a>
 <a href="/people" class="button">To list of people</a>
-<a href="/person_trans/<%= @person.id() %>/person">Add owing for a transaction</a>
-<a href="/person_trans/<%= @person.id() %>/person/trip">Add owing for a trip</a>
+<a href="/person_trans/<%= @person.id() %>/person" class="button">Add owing for a transaction</a>
+<a href="/person_trans/<%= @person.id() %>/person/trip" class="button">Add owing for a trip</a>
 <form class="delete button" action="/person/<%= @person.id() %>/delete" method="post">
     <input type="submit" value="Remove record">
 </form>
 <% if @relationships.length() > 0 %>
 <h3>They owe you for:</h3>
-<ul>
+<ul class="list-displaying-relationships">
   <% for relationship in @relationships %>
-    <li> <a href="/transaction/<%= relationship[1].id() %>">
+    <li class="detail-entry"> <a href="/transaction/<%= relationship[1].id() %>">
       <% if relationship[1].name().match?("Lent") %>
         <h4>Borrowed on <%= relationship[1].find_trip().name() %></h4>
-        <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete/trip" method="post">
-          <input type="submit" value="Delete">
+        <form action="/person_trans/<%= relationship[0].id() %>/delete/trip" method="post">
+          <input type="submit" value="Delete" class="delete detail-entry-button">
         </form>
-        <a href="/person_trans/<%= relationship[0].id() %>/edit/trip">Update</a>
+        <a href="/person_trans/<%= relationship[0].id() %>/edit/trip" class="detail-entry-button">Update</a>
       <% else %>
         <h4><%= relationship[1].name() %></h4>
-        <form class="delete button" action="/person_trans/<%= relationship[0].id() %>/delete" method="post">
-          <input type="submit" value="Delete">
+        <form action="/person_trans/<%= relationship[0].id() %>/delete" method="post">
+          <input class="delete detail-entry-button" type="submit" value="Delete">
         </form>
-        <a href="/person_trans/<%= relationship[0].id() %>/edit">Update</a>
+        <a href="/person_trans/<%= relationship[0].id() %>/edit" class="detail-entry-button">Update</a>
       <% end %>
       </a>
-      <li>Amount borrowed: <%= Money.convert_to_decimal_string(relationship[0].owe()) %></li>
-      whilst on: <a href="/trip/<%= relationship[1].trip_id() %>"><%= relationship[1].find_trip().name() %></a>
+    </li>
+    <li class="detail-entry">Amount borrowed: <%= Money.convert_to_decimal_string(relationship[0].owe()) %>
+      whilst on: <h4><a href="/trip/<%= relationship[1].trip_id() %>"><%= relationship[1].find_trip().name() %></a></h4>
     </li>
   <% end %>
-  <% end %>
+<% end %>
 </ul>

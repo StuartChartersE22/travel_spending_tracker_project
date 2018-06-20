@@ -1,18 +1,20 @@
 <h2>Tag: <%= @tag.name() %></h2>
-<a href="/tag/<%= @tag.id() %>/edit">Edit name</a>
+<a href="/tag/<%= @tag.id() %>/edit" class="button">Edit name</a>
 <a href="/tags" class="button">To list of tags</a>
 <form class="delete button" action="/tag/<%= @tag.id() %>/delete" method="post">
     <input type="submit" value="Delete Tag">
 </form>
 
 <h3>Used to tag:</h3>
-<ul>
+<ul class="list-displaying-relationships">
   <% for transaction in @tag.find_transactions() %>
-    <li> <a href="/transaction/<%= transaction.id() %>">
-      <h3><%= transaction.name() %></h3>
+    <li class="detail-entry"> <a href="/transaction/<%= transaction.id() %>">
+      <h4><%= transaction.name() %></h4>
     </a> whilst on:
     <a href="/trip/<%= transaction.trip_id() %>">
-      <%= transaction.find_trip().name() %>
-    </a> </li>
+      <h4><%= transaction.find_trip().name() %></h4>
+    </a> <form class="delete detail-entry-button" action="/trans_tag/<%= transaction.id %>/<%= @tag.id() %>/delete" method="post">
+      <input type="submit" value="Remove use">
+    </form> </li>
   <% end %>
 </ul>
