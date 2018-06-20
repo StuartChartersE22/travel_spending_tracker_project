@@ -1,17 +1,26 @@
 <form class="details-form" action="/trips/create" method="post">
-  <input type="text" name="name" placeholder="What is your new trip?" required>
 
-  <label for="time-log">Date of the trip:</label>
-  <input type="date" name="timelog" id="time-log" value=<%= Time.now %>>
+  <input type="text" name="name" placeholder="Trip name here" class="details-form-name-input" required>
 
-  <label for="current">Is this your current trip?</label>
-  <input type="checkbox" name="current" id="current" value="true" checked>
+  <div class="details-form-row">
+    <label for="time-log" class="details-form-cell">Date of the trip:</label>
+    <input type="date" name="timelog" id="time-log" class="details-form-cell" value=<%= Time.now %>>
+  </div>
 
-  <label for="budget">What is your spend goal?</label>
-  <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00">
+  <div class="details-form-row">
+    <label for="current" class="details-form-checkbox">Is this your current trip?</label>
+    <input type="checkbox" name="current" id="current" value="true" class="details-form-checkbox" checked>
+  </div>
 
-  <label for="bussines">Bussiness trip?</label>
-  <input type="checkbox" name="business" id="business" value="true">
+  <div class="details-form-row">
+    <label for="budget" class="details-form-cell">What is your spend goal?</label>
+    <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £ 0.00" class="details-form-cell">
+  </div>
 
-  <input type="submit" value="Make trip!">
+  <div class="details-form-row">
+    <label for="bussines" class="details-form-checkbox">Bussiness trip?</label>
+    <input type="checkbox" name="business" id="business" value="true" class="details-form-checkbox">
+  </div>
+
+  <input type="submit" value="Make trip!" class="details-form-submit-button">
 </form>
