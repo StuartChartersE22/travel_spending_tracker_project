@@ -1,6 +1,9 @@
 <form class="details-form" action="/people/create" method="post">
 
-  <input type="text" name="name" placeholder="What is the person's name?" required>
+  <input type="text" name="name" placeholder="Replace with name" class="details-form-name-input" required>
 
-  <input type="submit" value="Create record">
+  <div class="details-form-row">
+    <input type="submit" value="Create record" class="details-form-submit-button">
+    <a href="/people" class="details-form-submit-button">Back</a>
+  </div>
 </form>

@@ -1,7 +1,10 @@
 <form class="details-form" action="/person/<%= @person.id() %>/update" method="post">
 
-  <input type="text" name="name" placeholder="What is the person's name?" required value="<%= @person.name() %>">
+  <input type="text" name="name" placeholder="Replace with name" required class="details-form-name-input" value="<%= @person.name() %>">
 
-  <input type="submit" value="That's better!">
-  <a href="/person/<%= @person.id() %>">I liked the original</a>
+  <div class="details-form-row">
+    <input type="submit" value="That's better!" class="details-form-submit-button">
+    <a href="/person/<%= @person.id() %>" class="details-form-submit-button">I liked the original</a>
+  </div>
+
 </form>
