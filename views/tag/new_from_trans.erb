@@ -1,7 +1,10 @@
 <form class="details-form" action="/tags/create/<%= @transaction.id() %>" method="post">
 
-  <input type="text" name="name" placeholder="What is your new tag?" required>
+  <div class="details-form-row">
+    <input type="text" name="name" placeholder="What is your new tag?" class="details-form-name-input" required>
+  </div>
 
-  <a href="/transaction/<%= @transaction.id() %>">Back to transaction without tag</a>
-  <input type="submit" value="Make and add tag!">
+  <a href="/transaction/<%= @transaction.id() %>" class="details-form-submit-button">Back to transaction without tag</a>
+  <input type="submit" value="Make and add tag!" class="details-form-submit-button">
+
 </form>
