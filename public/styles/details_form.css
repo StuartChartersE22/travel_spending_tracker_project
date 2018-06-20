@@ -2,12 +2,12 @@
 
 }
 
-  .details-form-row{
-    display: block;
-    padding: 1rem;
-    position: relative;
-    left: 2rem;
-  }
+.details-form-row{
+  display: block;
+  padding: 1rem;
+  position: relative;
+  left: 2rem;
+}
 
 .details-form-submit-button{
   display: inline-block;
@@ -25,4 +25,11 @@
 
 .details-form-checkbox {
   display: inline-block;
+}
+
+.details-form-name-input {
+  font-size: 2em;
+  position: static;
+  display: block;
+  border: none;
 }

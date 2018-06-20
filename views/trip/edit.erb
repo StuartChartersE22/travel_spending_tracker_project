@@ -1,18 +1,28 @@
 <form class="details-form" action="/trips/<%= @trip.id()%>" method="post">
-  <input type="text" name="name" value="<%= @trip.name() %>" required>
 
-  <label for="date">Date of the trip:</label>
-  <input type="date" name="timelog" id="date" value=<%= @trip.date() %>>
+  <input type="text" name="name" value="<%= @trip.name() %>" class="details-form-name-input" required>
 
-  <label for="current">Is this your current trip?</label>
-  <input type="checkbox" name="current" id="current" value="true" <%= "checked" if @trip.current() %> >
+  <div class="details-form-row">
+    <label for="date" class="details-form-cell">Date of the trip:</label>
+    <input type="date" name="timelog" id="date" class="details-form-cell" value=<%= @trip.date() %>>
+  </div>
 
-  <label for="budget">What is your spend goal?</label>
-  <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
+  <div class="details-form-row">
+    <label for="current" class="details-form-checkbox">Is this your current trip?</label>
+    <input type="checkbox" name="current" id="current" value="true" class="details-form-checkbox" <%= "checked" if @trip.current() %> >
+  </div>
 
-  <label for="business">Business trip?</label>
-  <input type="checkbox" name="business" id="business" value="true" <%= "checked" if @trip.business() %> >
+  <div class="details-form-row">
+    <label for="budget" class="details-form-cell">What is your spend goal?</label>
+    <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £0.00" class="details-form-cell" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
+  </div>
 
-  <input type="submit" value="That's better!" class="button">
-  <a href="/trips" class="button">I liked the original</a>
+  <div class="details-form-row">
+    <label for="business" class="details-form-checkbox">Business trip?</label>
+    <input type="checkbox" name="business" id="business" value="true" class="details-form-checkbox" <%= "checked" if @trip.business() %> >
+  </div>
+
+  <input type="submit" value="That's better!" class="details-form-submit-button">
+  <a href="/trips" class="details-form-submit-button">I liked the original</a>
+
 </form>
