@@ -4,8 +4,8 @@
 
   <label for="owe">How much do they owe you? Max: <%= Money.convert_to_decimal_string(@max_amount) %></label>
   <input type="number" name="owe" min="0" step="0.01" id="owe" min="0.01"
-  placeholder="<%= Money.convert_to_decimal_string(@max_amount) %> left to assign"
-  value="<%= Money.convert_to_decimal_string(@max_amount) %>"
+  placeholder="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %> left to assign"
+  value="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>"
   max="<%= Money.convert_to_decimal_string(@max_amount) %>"  required>
 
   <input type="submit" value="That's better!">

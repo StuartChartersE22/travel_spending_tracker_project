@@ -58,6 +58,7 @@ end
 #EDIT FROM PERSON FOR TRANSACTION
 get "/person_trans/:id/edit" do
   @person_trans = PersonTrans.find(params["id"])
+  @person = Person.find(@person_trans.person_id())
   @transactions = @person.find_available_transactions().push(Transaction.find(@person_trans.transaction_id()))
   erb(:"person_trans/edit_from_person_for_trans")
 end

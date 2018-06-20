@@ -14,7 +14,7 @@
 
   <div class="details-form-row">
     <label for="budget" class="details-form-cell">What is your spend goal?</label>
-    <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £ 0.00" class="details-form-cell" value="<%= Money.convert_to_decimal_string(@trip.budget()) %>">
+    <input type="number" name="budget" min="0" step="0.01" id="budget" placeholder="optional £ 0.00" class="details-form-cell" value="<%= Money.convert_to_decimal_string(@trip.budget().delete('£ ')) %>">
   </div>
 
   <div class="details-form-row">

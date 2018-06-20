@@ -3,7 +3,7 @@
   <input type="text" name="name" placeholder="What is the item?" value="<%= @item.name() %>" required>
 
   <label for="amount">Price of item:</label>
-  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="<%= Money.convert_to_decimal_string(@max_amount) %> left to assign" min="0.01" value="<%= Money.convert_to_decimal_string(@item.amount()) %>" max="<%= Money.convert_to_decimal_string(@max_amount) %>" required>
+  <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %> left to assign" min="0.01" value="<%= Money.convert_to_decimal_string(@item.amount()).delete('£ ') %>" max="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>" required>
 
   <input type="submit" value="That's better">
   <a href="/transaction/<%= @item.transaction_id() %>">I liked the original</a>
