@@ -67,8 +67,8 @@ class Person
     end
 
     def find_owing_for_transaction(trans_id)
-      sql = "SELECT SUM(owe) FROM people_trans WHERE people_trans.person_id = $1"
-      values = [@id]
+      sql = "SELECT owe FROM people_trans WHERE people_trans.transaction_id = $1 AND people_trans.person_id = $2"
+      values = [trans_id, @id]
       return SqlRunner.run(sql, values).values()[0][0].to_i()
     end
 
