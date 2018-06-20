@@ -1,6 +1,6 @@
 <form class="details-form" action="/item/<%= @item.id() %>/<%= @item.transaction_id() %>/update" method="post">
 
-  <input type="text" name="name" placeholder="Replace with name of item" value="<%= @item.name() %>" class="details-form-name-input" required>
+  <input type="text" name="name" placeholder="Name of item" value="<%= @item.name() %>" class="details-form-name-input" required>
 
   <div class="details-form-row">
     <label for="amount" class="details-form-cell">Price of item:</label>
