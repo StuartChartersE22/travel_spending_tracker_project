@@ -33,3 +33,17 @@
   display: block;
   border: none;
 }
+
+.details-form-tag-options{
+  font-size: 2em;
+  position: static;
+  display: inline-block;
+  padding: 0px 0.2em;
+  text-decoration: none;
+  color: black;
+  height: 1.2em;
+  border: solid 1px grey;
+  background-color: #e8e8e8;
+  border-radius: 5px;
+  vertical-align: middle;
+}

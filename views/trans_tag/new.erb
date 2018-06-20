@@ -1,9 +1,15 @@
-<form class="tag-selection" action="/trans_tag/create/<%= @transaction.id() %>" method="post">
-  <select class="tag-options" name="tag_id">
-    <% for tag in @tags %>
-      <option value="<%= tag.id() %>"><%= tag.name() %></option>
-    <% end %>
-  </select>
-  <input type="submit" value="Add tag">
-  <a href="/tags/new/<%= @transaction.id() %>">Create new tag</a>
+<form class="details-form" action="/trans_tag/create/<%= @transaction.id() %>" method="post">
+
+  <div class="details-form-row">
+    <select class="details-form-tag-options" name="tag_id">
+      <% for tag in @tags %>
+        <option value="<%= tag.id() %>"><%= tag.name() %></option>
+      <% end %>
+    </select>
+
+    <a href="/tags/new/<%= @transaction.id() %>" class="details-form-tag-options">Create new tag</a>
+  </div>
+  
+  <input type="submit" value="Add tag" class="details-form-submit-button">
+
 </form>
