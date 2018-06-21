@@ -8,12 +8,14 @@
 <h3>Used to tag:</h3>
 <ul class="list-displaying-relationships">
   <% for transaction in @tag.find_transactions() %>
-    <li class="detail-entry"> <a href="/transaction/<%= transaction.id() %>">
+  <div class="detail-entry">
+    <li> <a href="/transaction/<%= transaction.id() %>">
       <h4><%= transaction.name() %></h4>
-    </a> whilst on:
-    <a href="/trip/<%= transaction.trip_id() %>">
-      <h4><%= transaction.find_trip().name() %></h4>
-    </a> <form class="delete detail-entry-button" action="/trans_tag/<%= transaction.id %>/<%= @tag.id() %>/delete" method="post">
+      </a> whilst on:
+      <a href="/trip/<%= transaction.trip_id() %>">
+        <h4><%= transaction.find_trip().name() %></h4></a></li>
+    <li class="detail-entry-information">
+      <form class="delete detail-entry-button" action="/trans_tag/<%= transaction.id %>/<%= @tag.id() %>/delete" method="post">
       <input type="submit" value="Remove use">
     </form> </li>
   <% end %>

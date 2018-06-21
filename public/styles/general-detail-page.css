@@ -3,13 +3,31 @@
 }
 
 .detail-entry{
-
+  padding: 1rem;
+  position: relative;
+  left: 2rem;
+  border-bottom: dashed 1px lightgrey;
+  border-top: dashed 1px lightgrey;
 }
 
 .detail-entry-button{
-
+  display: inline-block;
+  height: 1.5em;
+  font-size: 1em;
+  padding: 1rem;
 }
 
 .button{
-  
+  display: inline-block;
+  height: 1.5em;
+  font-size: 1em;
+  padding: 1rem;
+}
+
+h4 {
+  display: inline;
+}
+
+.detail-entry-information{
+  display: block;
 }

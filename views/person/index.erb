@@ -2,7 +2,9 @@
 <a href="/people/new" class="button">Make new person record</a>
 <ul class="list-displaying-relationships">
   <% for person in @people %>
-    <li><a href="/person/<%= person.id() %>" class="detail-entry"><h4><%= person.name() %></h4></a>
+  <div class="detail-entry">
+    <li><a href="/person/<%= person.id() %>"><h4><%= person.name() %></h4></a></li>
+    <li class="detail-entry-information">
       <a href="/person/<%= person.id() %>/edit" class="detail-entry-button">Edit</a>
       <a href="/person_trans/<%= person.id() %>/person" class="detail-entry-button">Add owing for a transaction</a>
       <a href="/person_trans/<%= person.id() %>/person/trip" class="detail-entry-button">Add owing for a trip</a>
@@ -10,5 +12,6 @@
           <input type="submit" value="Delete person record" class="delete detail-entry-button">
       </form>
     </li>
+  </div>
   <% end %>
 </ul>

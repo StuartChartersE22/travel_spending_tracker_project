@@ -2,7 +2,9 @@
 <a href="/tags/new" class="button">Make new tag</a>
 <ul class="list-displaying-relationships">
   <% for tag in @tags %>
-    <li class="detail-entry"><a href="/tag/<%= tag.id() %>"><h4><%= tag.name() %></h4></a>
+  <div class="detail-entry">
+    <li><a href="/tag/<%= tag.id() %>"><h4><%= tag.name() %></h4></a></li>
+    <li class="detail-entry-information">
       <a href="/tag/<%= tag.id() %>/edit" class="detail-entry-button">Edit</a>
       <form class="delete detail-entry-button" action="/tag/<%= tag.id() %>/delete" method="post">
           <input type="submit" value="Delete Tag">
