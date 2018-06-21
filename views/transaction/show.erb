@@ -1,21 +1,30 @@
-<table class="transactions-overview">
+<table class="transaction-details">
 
-  <thead>
+  <tr>
     <th><h2><% if @transaction.name() == @transaction.date() %>
         <%= @transaction.name() %></h2></th>
-        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
+        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a>
+        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+          <input type="submit" value="Delete transaction">
+        </form> </td>
       <% elsif @transaction.name() == "Lent" %>
         Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a></h2>
+        <td><form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+          <input type="submit" value="Delete lending">
+        </form></td>
       <% else %>
         <%= @transaction.name() %></h2></th>
         <td><p><%= @transaction.date() %></p></td>
-        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a></td>
+        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a>
+        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+          <input type="submit" value="Delete transaction">
+        </form></td>
     <% end %>
 
     <td><p><% if @transaction.business() %>
         Business expense
       <% else %>
-        Non-business
+        Non-business expense
       <% end %>
     </p></td>
   </thead>
