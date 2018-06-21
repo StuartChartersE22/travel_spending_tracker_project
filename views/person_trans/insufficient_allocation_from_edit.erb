@@ -8,7 +8,7 @@
     <input type="number" name="owe" min="0" step="0.01" id="owe" min="0.01" class="details-form-cell"
     placeholder="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %> left to assign"
     value="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>"
-    max="<%= Money.convert_to_decimal_string(@max_amount) %>"  required>
+    max="<%= Money.convert_to_decimal_string(@max_amount).delete('£ ') %>"  required>
   </div>
 
   <input type="submit" value="That's better!" class="details-form-submit-button">

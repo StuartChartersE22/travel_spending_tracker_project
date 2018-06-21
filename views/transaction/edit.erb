@@ -12,7 +12,7 @@
 
   <div class="details-form-row">
     <label for="amount" class="details-form-cell">How much did you spend?</label>
-    <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01" class="details-form-cell" value="<%= Money.convert_to_decimal_string(@transaction.amount().delete('£ ')) %>" required>
+    <input type="number" name="amount" min="0" step="0.01" id="amount" placeholder="0.00" min="0.01" class="details-form-cell" value="<%= Money.convert_to_decimal_string(@transaction.amount()).delete('£ ') %>" required>
   </div>
 
   <div class="details-form-row">

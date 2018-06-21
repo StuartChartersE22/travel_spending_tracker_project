@@ -10,7 +10,7 @@
 
   <div class="details-form-row">
     <label for="owe" class="details-form-cell">How much do they owe you?</label>
-    <input type="number" name="owe" min="0" step="0.01" id="owe" placeholder="0.00" min="0.01" value="<%= Money.convert_to_decimal_string(@person_trans.owe().delete('£ ')) %>" class="details-form-cell" required>
+    <input type="number" name="owe" min="0" step="0.01" id="owe" placeholder="0.00" min="0.01" value="<%= Money.convert_to_decimal_string(@person_trans.owe()).delete('£ ') %>" class="details-form-cell" required>
   </div>
 
   <input type="submit" value="That's better!" class="details-form-submit-button">
