@@ -1,0 +1,32 @@
+nav {
+align-content: left;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+
+nav ul li {
+  display: inline-block;
+    margin-left:30px;
+    margin-right:30px;
+}
+
+nav ul li:first-child {
+    margin-left:0px;
+}
+nav ul li:last-child {
+  margin-right: 0px;
+}
+
+nav ul li:hover, nav ul a:hover{
+  background-color: black;
+  color: white;
+  font-style: normal;
+  text-decoration: none;
+}
+
+nav ul a {
+  color: black;
+  font-style: normal;
+  text-decoration: none;
+}
