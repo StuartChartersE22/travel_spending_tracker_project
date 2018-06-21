@@ -35,3 +35,19 @@ h4 {
 .table-head-cell{
   display: inline-block;
 }
+
+.transaction-breakdown-list td{
+  text-align: center;
+  border-bottom: dashed 1px lightgrey;
+  border-top: dashed 1px lightgrey;
+
+}
+
+.header td{
+  text-align: center;
+
+}
+
+ul{
+  list-style-type: none;
+}

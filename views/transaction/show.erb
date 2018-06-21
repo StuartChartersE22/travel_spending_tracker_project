@@ -1,75 +1,95 @@
 <table class="transaction-details">
 
-  <tr>
-    <th><h2><% if @transaction.name() == @transaction.date() %>
-        <%= @transaction.name() %></h2></th>
-        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a>
-        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
-          <input type="submit" value="Delete transaction">
-        </form> </td>
-      <% elsif @transaction.name() == "Lent" %>
-        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a></h2>
-        <td><form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
-          <input type="submit" value="Delete lending">
-        </form></td>
+  <tr class="header">
+      <% if @transaction.name() == "Lent" %>
+        <td>
+          <h2>Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a></h2> <br>
+          <a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to trip</a>
+          <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+          <input type="submit" value="Delete Transaction">
+        </form>
+        </td>
+        <td>
+          <ul>
+            <li><h4>Date of transaction: </h4><%= @transaction.date() %></li>
+            <li><h4>Transaction type: </h4>
+            <% if @transaction.business() %>
+              Business expense
+            <% else %>
+              Non-business expense
+            <% end %></li>
+            <li><h4>Spent: </h4><%= Money.convert_to_decimal_string(@transaction.amount()) %> </li>
+            <% if @transaction.company() %>
+              <li><h4>Spent at: </h4><%= @transaction.company() %> </li>
+            <% end %>
+            <li><h4>Whilst on:</h4><%= @transaction.find_trip().name() %></li>
+          </ul>
+        </td>
       <% else %>
-        <%= @transaction.name() %></h2></th>
-        <td><p><%= @transaction.date() %></p></td>
-        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a>
-        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
-          <input type="submit" value="Delete transaction">
-        </form></td>
+        <td>
+          <h2><%= @transaction.name() %></h2> <br>
+          <a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a>
+          <a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to trip</a>
+          <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
+          <input type="submit" value="Delete Transaction">
+          </form>
+        </td>
+        <td>
+          <ul>
+            <li><h4>Date of transaction: </h4><%= @transaction.date() %></li>
+            <li><h4>Transaction type: </h4>
+            <% if @transaction.business() %>
+              Business expense
+            <% else %>
+                Non-business expense
+            <% end %></li>
+            <li><h4>Spent: </h4><%= Money.convert_to_decimal_string(@transaction.amount()) %> </li>
+            <% if @transaction.company() %>
+              <li><h4>Spent at: </h4><%= @transaction.company() %> </li>
+            <% end %>
+            <li><h4>Whilst on:</h4><%= @transaction.find_trip().name() %></li>
+          </ul>
+        </td>
+        <td></td>
+      </td>
     <% end %>
+  </tr>
 
-    <td><p><% if @transaction.business() %>
-        Business expense
-      <% else %>
-        Non-business expense
+  <tr class="transaction-breakdown-list">
+    <td colspan="2"><h3>Breakdown:</h3></td>
+  </tr>
+
+    <tr class="transaction-breakdown-list">
+      <td><h4>Tags:</h4> <br>
+      <a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></td>
+      <td>
+        <ul>
+          <% for tag in @tags %>
+            <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete button" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
+              <input type="submit" value="Remove">
+            </form></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <tr class="transaction-breakdown-list">
+      <td><h4>Items:</h4> <br>
+      <a href="/item/<%= @transaction.id() %>/new">Add item</a></td>
+      <td>
+        <ul>
+          <% for item in @items %>
+          <li> <%= item.name() %> for <%= Money.convert_to_decimal_string(item.amount()) %>
+          <form class="delete button" action="/item/<%= item.id() %>/delete" method="post">
+          <input type="submit" value="Remove">
+          </form>
+          <a href="/item/<%= item.id() %>/edit" class="button">Change details</a>
+         </li>
       <% end %>
-    </p></td>
-  </thead>
-
-  <tbody>
-    <tr>
-      <th>Spent:</th>
-      <td> <%= Money.convert_to_decimal_string(@transaction.amount()) %> </td>
-    </tr>
-    <% if @transaction.company() %>
-      <tr>
-        <th>Spent at:</th>
-        <td> <%= @transaction.company() %> </td>
-      </tr>
-    <% end %>
-    <tr>
-      <th>Whilst on:</th>
-      <td><%= @transaction.find_trip().name() %></td>
-    </tr>
-    <tr>
-      <th>Tags:</th>
-      <td><ul>
-        <% for tag in @tags %>
-          <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete button" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
-            <input type="submit" value="Remove">
-          </form> </li>
-        <% end %>
-        <li><a href="/trans-tag/<%= @transaction.id() %>" class="button">Add tag</a></li>
       </ul></td>
     </tr>
-    <th>Items:</th>
-    <td><ul>
-      <% for item in @items %>
-        <li> <%= item.name() %> for <%= Money.convert_to_decimal_string(item.amount()) %>
-          <form class="delete" action="/item/<%= item.id() %>/delete" method="post">
-          <input type="submit" value="Remove">
-          <li><a href="/item/<%= item.id() %>/edit">Change details</a></li>
-        </form> </li>
-      <% end %>
-      <li><a href="/item/<%= @transaction.id() %>/new">Add item</a></li>
-    </ul></td>
-  </tr>
     <% unless @transaction.name() == "Lent" %>
-    <tr>
-      <th>People who have borrowed on this trip</th>
+    <tr class="transaction-breakdown-list">
+      <td><h4>People who have borrowed on this trip:</h4></td>
       <td> <ul>
         <% for person in @people %>
           <li> <a href="/person/<%= person.id() %>"><%= person.name() %></a> <%= Money.convert_to_decimal_string(person.find_owing_for_transaction(@transaction.id())) %> </li>
@@ -78,13 +98,4 @@
     </tr>
     <% end %>
   </tbody>
-  <tfoot>
-    <tr>
-      <td><a href="/trip/<%= @transaction.trip_id() %>" class="button">Back to trip</a></td>
-      <td>
-        <form class="delete button" action="/transaction/<%= @transaction.id() %>/delete" method="post">
-        <input type="submit" value="Delete Transaction">
-      </form></td>
-    </tr>
-  </tfoot>
 </table>
