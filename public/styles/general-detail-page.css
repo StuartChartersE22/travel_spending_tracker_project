@@ -31,3 +31,7 @@ h4 {
 .detail-entry-information{
   display: block;
 }
+
+.table-head-cell{
+  display: inline-block;
+}

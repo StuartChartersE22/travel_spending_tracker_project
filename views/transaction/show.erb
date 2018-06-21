@@ -1,14 +1,15 @@
 <table class="transactions-overview">
 
   <thead>
-    <th><h3><% if @transaction.name() == @transaction.date() %>
-        <%= @transaction.name() %></h3></th>
+    <th><h2><% if @transaction.name() == @transaction.date() %>
+        <%= @transaction.name() %></h2></th>
         <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit</a></td>
       <% elsif @transaction.name() == "Lent" %>
-        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a>
+        Lent to <a href="/person/<%= @people[0].id() %>"><%= @people[0].name() %></a></h2>
       <% else %>
-        <%= @transaction.name() %></h3></th>
+        <%= @transaction.name() %></h2></th>
         <td><p><%= @transaction.date() %></p></td>
+        <td><a href="/transaction/<%= @transaction.id() %>/edit" class="button">Edit transaction</a></td>
     <% end %>
 
     <td><p><% if @transaction.business() %>
@@ -38,11 +39,11 @@
       <th>Tags:</th>
       <td><ul>
         <% for tag in @tags %>
-          <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
+          <li> <a href="/tag/<%= tag.id() %>"><%= tag.name() %></a> <form class="delete button" action="/trans_tag/<%= @transaction.id() %>/<%= tag.id() %>/delete" method="post">
             <input type="submit" value="Remove">
           </form> </li>
         <% end %>
-        <li><a href="/trans-tag/<%= @transaction.id() %>">Add tag</a></li>
+        <li><a href="/trans-tag/<%= @transaction.id() %>" class="button">Add tag</a></li>
       </ul></td>
     </tr>
     <th>Items:</th>

@@ -23,8 +23,8 @@
     <a href="/trip/<%= @current.id() %>/new" class="button">New transaction</a>
     <a href="/trip/<%= @current.id()%>" class= "button">See transactions</a>
     <a href="/trips/<%= @current.id()%>/edit">Edit</a>
-    <form class="delete" action="/trips/<%= @current.id() %>/delete" method="post">
-        <input type="submit" value="Delete Trip" class="button">
+    <form class="delete button" action="/trips/<%= @current.id() %>/delete" method="post">
+        <input type="submit" value="Delete Trip">
     </form>
 
   </li>
@@ -44,10 +44,10 @@
     </tr>
     </table>
 
-    <a href="/trip/<%= trip.id()%>">See transactions</a>
-    <a href="/trips/<%= trip.id()%>/edit">Edit</a>
-    <form class="delete" action="/trips/<%= trip.id() %>/delete" method="post">
-      <input type="submit" value="Delete Trip" class="button">
+    <a href="/trip/<%= trip.id()%>" class="button">See transactions</a>
+    <a href="/trips/<%= trip.id()%>/edit" class="button">Edit</a>
+    <form class="delete button" action="/trips/<%= trip.id() %>/delete" method="post">
+      <input type="submit" value="Delete Trip">
     </form>
 
    </li>
