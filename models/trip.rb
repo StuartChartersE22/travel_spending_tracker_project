@@ -144,7 +144,7 @@ class Trip
   end
 
   def self.all_but_current()
-    sql = "SELECT * FROM trips EXCEPT (SELECT * FROM trips WHERE current = true)"
+    sql = "SELECT * FROM trips EXCEPT (SELECT * FROM trips WHERE current = true) ORDER BY timelog DESC"
     array_of_details = SqlRunner.run(sql)
     return self.map_trips(array_of_details)
   end
